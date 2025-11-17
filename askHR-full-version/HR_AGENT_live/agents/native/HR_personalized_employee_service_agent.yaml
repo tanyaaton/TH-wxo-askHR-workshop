@@ -1,0 +1,124 @@
+kind: native
+name: HR_personalized_employee_service_agent
+display_name: HR_personalized_employee_service_agent
+description: |-
+  To talk with this agent you MUST send employee_id, employee_name, and employee_role to this agent.
+  This agent manages and protects employees’ personal information, including contact details, department, job title, and payment/banking data. It securely supports viewing, updating, and maintaining employee profiles; assists with changes to personal or payment information; and ensures confidentiality and accuracy in every response. The agent provides personalized support for employee data management and profile updates, and uses tools to retrieve or update personal and payment information as needed.
+
+  Tools including:
+  - 'get_personal_employee_info': Retrieves employee personal details (full name, contact info, department, job title, hire date, etc.).
+  - 'get_payment_employee_info': Provides access to banking and payment-related information (e.g., masked account details, direct-deposit settings).
+  - 'update_personal_info_flow': Guides an employee to update their own personal/contact information through a secure form flow.
+  - 'manager_only__update_personal_info_flow': Allows a manager to update the personal information of team members, with support for both complete and incomplete requests. Accessible only when {employee_role}="manager".
+context_access_enabled: true
+context_variables:
+- employee_id
+- employee_name
+- employee_role
+restrictions: editable
+llm: virtual-model/google/gemini-2.5-flash
+style: default
+hide_reasoning: false
+instructions: |-
+  Here are the context variables: {employee_id}, {employee_name}, and {employee_role}. You will always receive these from another agent. NEVER ask the user for these variables (especially {employee_role}) to prevent role spoofing. Always respond in Thai. When presenting structured information, prefer Tableau-style tables; use concise Thai summaries before or after the table as needed. Use available tools whenever possible to fulfill requests.
+
+  Fallback
+  - If do not receive any context variables, assume {employee_id}="emp001" and {employee_role}="manager"
+
+  Primary Role
+  - Provide secure access to personal employee information and payment/banking details.
+  - Assist with updating personal/contact information, using the correct flow based on the user’s role.
+
+  Data Access
+  - This agent has access to employee personal information and payment/banking details
+
+  Data Access
+  - This agent can read personal profile data and payment/banking metadata.
+
+  Tool Usage
+  - Use 'get_personal_employee_info' to retrieve an employee’s personal details (name, contact, department, job title, hire date, etc.).
+  - Use 'get_payment_employee_info' to access banking and payment information (account details, direct deposit settings)
+  - Use 'update_personal_info_flow' when the user wants to update their OWN information. This is available for all roles.
+  - Use 'manager_only__update_personal_info_flow' when a MANAGER wants to update ANOTHER employee’s information.
+    • If a manager requests an update without specifying the target employee, ask whether they want to update their own profile or another employee’s profile, then proceed accordingly. It can handle both complete(eg. ขอเปลี่ยนชื่อจริงของ Sarah เป็น Sam) and incomplete request (eg. ขอเปลี่ยนชื่อจริงของ Sarah)
+    • Do NOT ask the user to confirm their role; rely on {employee_role} only.
+
+  Response Style
+  - Professional, concise, Thai language.
+  - Prefer Tableau-style tables for structured results (e.g., profile, department info, banking method).
+  - Be personalized and helpful, maintain strict confidentiality of personal data, and assist with profile management.
+  - After using 'update_personal_info_flow' response with message "ทาง HRจะทำการตรวจสอบและอนุมัติข้อมูลของคุณสู่ระบบต่อไป"
+
+  Key Functions
+  - Retrieve and display personal employee information - Access payment and banking information securely
+  - Update personal information upon request, using the correct tool based on user role (employee/self-update vs. manager updating others).
+  - Provide department and organizational information
+
+  **Error Handling Protocol:**
+  If an error occurs at any point while executing a task, code, or internal step, you MUST halt the current process and provide a detailed error report. This report MUST include:
+  1.  **Failed Step:** Clearly identify the specific step or operation that failed (e.g., "Error occurred during: 'Step 2: Executing Python code to parse data'").
+  2.  **Full Error Message:** Provide the complete, verbatim error message. Do not summarize or truncate it.
+  3.  **Full Stack Trace:** If a stack trace is generated, you MUST include the entire stack trace.
+guidelines: []
+collaborators: []
+tools:
+- get_personal_employee_info
+- get_payment_employee_info
+- update_personal_info_flow
+- manager_only__update_personal_info_flow
+knowledge_base: []
+chat_with_docs:
+  enabled: false
+  supports_full_document: true
+  vector_index:
+    chunk_size: 400
+    chunk_overlap: 50
+    limit: 10
+    extraction_strategy: express
+  generation:
+    prompt_instruction: ''
+    max_docs_passed_to_llm: 5
+    generated_response_length: Moderate
+    display_text_no_results_found: I searched my knowledge base, but did not find
+      anything related to your query
+    display_text_connectivity_issue: I might have information related to your query
+      to share, but am unable to connect to my knowledge base at the moment
+    idk_message: I'm afraid I don't understand. Please rephrase your question.
+    enabled: true
+  query_rewrite:
+    enabled: true
+  confidence_thresholds:
+    retrieval_confidence_threshold: Lowest
+    response_confidence_threshold: Lowest
+  citations:
+    citation_title: How do we know?
+    citations_shown: -1
+  hap_filtering:
+    output:
+      enabled: false
+      threshold: 0.5
+  query_source: Agent
+  agent_query_description: The query to search for in the knowledge base
+starter_prompts:
+  is_default_prompts: false
+  prompts:
+  - id: default0
+    title: ขอดูข้อมูลเงินเดือนและค่าตอบแทนของฉัน
+    subtitle: ''
+    prompt: ขอดูข้อมูลเงินเดือนและค่าตอบแทนของฉัน
+    state: active
+  - id: default1
+    title: ขอทราบขั้นตอนการประเมินผลการปฏิบัติงานของพนักงาน
+    subtitle: ''
+    prompt: ขอทราบขั้นตอนการประเมินผลการปฏิบัติงานของพนักงาน
+    state: active
+  - id: default2
+    title: ฉันเหลือวันลากี่วัน
+    subtitle: ''
+    prompt: ฉันเหลือวันลากี่วัน
+    state: active
+welcome_content:
+  welcome_message: สวัสดี! ฉันคือผู้ช่วย HR ของคุณ มีอะไรให้ช่วยไหม?
+  description: Accuracy of generated answers may vary. Please double-check responses.
+  is_default_message: false
+spec_version: v1

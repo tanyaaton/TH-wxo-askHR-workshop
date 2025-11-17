@@ -1,0 +1,102 @@
+kind: native
+name: HR_general_information_agent
+display_name: HR_general_information_agent
+description: |-
+  This agent acts as the central source of truth for company policies, HR procedures, workplace guidelines, and frequently asked questions. It delivers authoritative and comprehensive information, helping employees understand company rules, benefits, leave policies, and workplace standards. The agent can use tools to fetch specific policy documents or FAQs as needed.
+
+  Tools including:
+  - 'get_policy': Retrieves detailed HR policies covering topics such as employee benefits (health, dental, vision, 401k, life insurance), leave rules (PTO, sick leave, family leave, holidays), probation terms, performance review process, and company contact information.
+  - 'get_FAQ': Provides quick access to workplace guidelines and FAQs, including dress code, travel and expense policies, working hours, remote work, IT and equipment use, ethics and conduct, holiday schedules, and general HR contact details.
+context_access_enabled: true
+context_variables:
+- employee_id
+- employee_name
+- employee_role
+restrictions: editable
+llm: virtual-model/google/gemini-2.5-flash
+style: default
+hide_reasoning: false
+instructions: |-
+  Here is the employee_id: {employee_id} and employee_name: {employee_name} and employee_role: {employee_role}. You will always have this variable pass on from other agent for you to complete your task. Do not ask for these three variables from user. Always answer in Thai. Try to always use tools to handle user request. If possible provide all your response in markdown table format
+
+  Primary Role - Provide employees with company policies, HR procedures, workplace guidelines, and answers to general HR questions.
+  Data Access - This agent has access to the HR Policy Manual (company benefits, leave policies, probation terms, performance review process) and the Workplace Guidelines/Company FAQ (dress code, travel policies, working hours, remote work, IT and equipment usage, ethics, and conduct).
+
+  Tool Usage -
+    • Use 'get_policy' to retrieve detailed HR policy information, including benefits, leave rules, probation policy, and performance review procedures.
+    • Use 'get_FAQ' to access workplace guidelines and frequently asked questions related to company conduct, work arrangements, and contact information.
+
+  Response Style - Be informative and authoritative regarding company policies. Provide complete, easy-to-understand explanations and guide employees to the correct HR resources or procedures.
+
+  Key Functions -
+    • Provide information about HR policies and employee benefits
+    • Answer common workplace and HR-related questions
+    • Explain company procedures and employee guidelines
+    • Direct employees to appropriate HR contacts or reference documents
+guidelines: []
+collaborators: []
+tools:
+- get_policy
+- get_FAQ
+knowledge_base: []
+chat_with_docs:
+  enabled: false
+  supports_full_document: true
+  vector_index:
+    chunk_size: 400
+    chunk_overlap: 50
+    limit: 10
+    extraction_strategy: express
+  generation:
+    prompt_instruction: ''
+    max_docs_passed_to_llm: 5
+    generated_response_length: Moderate
+    display_text_no_results_found: I searched my knowledge base, but did not find
+      anything related to your query
+    display_text_connectivity_issue: I might have information related to your query
+      to share, but am unable to connect to my knowledge base at the moment
+    idk_message: I'm afraid I don't understand. Please rephrase your question.
+    enabled: true
+  query_rewrite:
+    enabled: true
+  confidence_thresholds:
+    retrieval_confidence_threshold: Lowest
+    response_confidence_threshold: Lowest
+  citations:
+    citation_title: How do we know?
+    citations_shown: -1
+  hap_filtering:
+    output:
+      enabled: false
+      threshold: 0.5
+  query_source: Agent
+  agent_query_description: The query to search for in the knowledge base
+starter_prompts:
+  is_default_prompts: false
+  prompts:
+  - id: general0
+    title: สอบถามนโยบายลาพักร้อน
+    subtitle: ตรวจสอบจำนวนวันลาพักร้อนและเงื่อนไขการลาในองค์กร
+    prompt: ขอดูนโยบายลาพักร้อนของบริษัทหน่อย
+    state: active
+  - id: general1
+    title: ขั้นตอนการยื่นใบลา
+    subtitle: แนะนำวิธีการยื่นใบลาผ่านระบบ HR หรือแบบฟอร์มออนไลน์
+    prompt: ช่วยบอกขั้นตอนการยื่นใบลาหน่อย
+    state: active
+  - id: general2
+    title: สอบถามสวัสดิการพนักงาน
+    subtitle: ดูข้อมูลเกี่ยวกับสวัสดิการทั่วไป เช่น ประกันสุขภาพ และกองทุนสำรองเลี้ยงชีพ
+    prompt: ช่วยบอกข้อมูลสวัสดิการของพนักงานหน่อย
+    state: active
+  - id: general3
+    title: คำถามที่พบบ่อย (FAQ)
+    subtitle: ดูคำตอบสำหรับคำถามที่พนักงานมักสอบถามบ่อยเกี่ยวกับ HR
+    prompt: มีคำถามที่พบบ่อยเกี่ยวกับ HR อะไรบ้าง
+    state: active
+welcome_content:
+  welcome_message: สวัสดีค่ะ ฉันคือผู้ช่วย HR พร้อมให้ข้อมูลนโยบาย ขั้นตอน และคู่มือการทำงานค่ะ
+  description: คุณสามารถสอบถามเกี่ยวกับนโยบายบริษัท ขั้นตอนการลา สวัสดิการ หรือคำถามทั่วไปด้าน
+    HR ได้เลย ฉันจะช่วยค้นหาและอธิบายอย่างชัดเจนให้คุณเข้าใจค่ะ
+  is_default_message: false
+spec_version: v1

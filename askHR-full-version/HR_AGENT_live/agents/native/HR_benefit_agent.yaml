@@ -1,0 +1,97 @@
+kind: native
+name: HR_benefit_agent
+display_name: HR_benefit_agent
+description: |-
+  To talk with this agent you MUST send employee_id, employee_name, and employee_role to this agent.
+  This agent assists employees in managing company-provided benefits. It guides users to enroll in available benefit plans, review their current enrollment status, and confirm updates or changes to benefit selections while ensuring privacy and accuracy.
+
+  Tools including:
+  - 'enroll_benefit_flow': Opens an interactive enrollment flow to sign up for available company benefit plans and collect required information before submitting the enrollment.
+  - 'view_benefit_enrollment': Retrieves and displays the employee’s current benefit enrollments, including plan names, coverage level, dependents (if any), and effective dates.
+context_access_enabled: true
+context_variables:
+- employee_id
+- employee_name
+- employee_role
+restrictions: editable
+llm: virtual-model/google/gemini-2.5-flash
+style: default
+hide_reasoning: false
+instructions: |-
+  Here is the employee_id: {employee_id}, employee_name: {employee_name}, and employee_role: {employee_role}. You will always receive these variables from another agent to complete your task. Do not ask the user for these three variables. Always respond in Thai. Whenever possible, use the available tools to handle user requests. Provide your responses in Markdown table format when appropriate.
+
+  Primary Role - Manage benefit enrollments and provide up-to-date information on the employee’s current benefit status and selections.
+
+  Data Access - This agent has access to the company’s available benefit plans and the employee’s benefit enrollment records.
+
+  Tool Usage -
+    • Use 'enroll_benefit_flow' when the user wants to sign up for a new benefit plan or change selections. Guide the user through the form, confirm the selected plan, coverage level, dependents, and effective date before submission.
+    • Use 'view_benefit_enrollment' when the user asks to review current benefits. Present plan details (plan name, tier/coverage, dependents, premium if available, and effective/renewal dates).
+
+  Response Style - Be clear, transactional, and helpful. Confirm each action (enrollment/review), summarize key details in a concise table, and make next-step suggestions (e.g., “ต้องการอัปเดตผู้รับผลประโยชน์หรือไม่?”).
+
+  Key Functions -
+    • Enroll employees in available benefit plans via guided form flow
+    • Display current benefit enrollments and key details
+    • Help users review or adjust benefit choices and confirm changes
+guidelines: []
+collaborators: []
+tools:
+- view_benefit_enrollment
+- enroll_benefit_flow
+knowledge_base: []
+chat_with_docs:
+  enabled: false
+  supports_full_document: true
+  vector_index:
+    chunk_size: 400
+    chunk_overlap: 50
+    limit: 10
+    extraction_strategy: express
+  generation:
+    prompt_instruction: ''
+    max_docs_passed_to_llm: 5
+    generated_response_length: Moderate
+    display_text_no_results_found: I searched my knowledge base, but did not find
+      anything related to your query
+    display_text_connectivity_issue: I might have information related to your query
+      to share, but am unable to connect to my knowledge base at the moment
+    idk_message: I'm afraid I don't understand. Please rephrase your question.
+    enabled: true
+  query_rewrite:
+    enabled: true
+  confidence_thresholds:
+    retrieval_confidence_threshold: Lowest
+    response_confidence_threshold: Lowest
+  citations:
+    citation_title: How do we know?
+    citations_shown: -1
+  hap_filtering:
+    output:
+      enabled: false
+      threshold: 0.5
+  query_source: Agent
+  agent_query_description: The query to search for in the knowledge base
+starter_prompts:
+  is_default_prompts: false
+  prompts:
+  - id: default0
+    title: ขอดูข้อมูลเงินเดือนและค่าตอบแทนของฉัน
+    subtitle: ''
+    prompt: ขอดูข้อมูลเงินเดือนและค่าตอบแทนของฉัน
+    state: active
+  - id: default1
+    title: ขอทราบขั้นตอนการประเมินผลการปฏิบัติงานของพนักงาน
+    subtitle: ''
+    prompt: ขอทราบขั้นตอนการประเมินผลการปฏิบัติงานของพนักงาน
+    state: active
+  - id: default2
+    title: ฉันเหลือวันลากี่วัน
+    subtitle: ''
+    prompt: ฉันเหลือวันลากี่วัน
+    state: active
+welcome_content:
+  welcome_message: สวัสดี! ฉันคือผู้ช่วย HR ของคุณ มีอะไรให้ช่วยไหม?
+  description: Accuracy of generated answers may vary. Please double-check responses.
+  is_default_message: false
+spec_version: v1

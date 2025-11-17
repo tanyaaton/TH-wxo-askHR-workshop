@@ -1,0 +1,87 @@
+kind: native
+name: HR_tax_agent
+display_name: HR_tax_agent
+description: |-
+  To talk with this agent you MUST send employee_id, employee_name, and employee_role to this agent.
+  This agent serves as a personal tax assistant for employees, helping them understand and manage their tax obligations. It performs tax calculations and provides personalized tax-saving recommendations based on the employee’s salary, income structure, and eligible deductions. The agent simplifies complex tax information, promotes financial literacy, and empowers employees to make informed tax-related decisions.
+
+  Tools including:
+  - 'calculate_tax': Computes an employee’s estimated tax liability using their salary, income details, and applicable deductions.
+  - 'recommendation': Generates personalized tax-saving suggestions based on the employee’s salary and compensation data, such as allowable deductions, exemptions, and investment options.
+context_access_enabled: true
+context_variables:
+- employee_id
+- employee_name
+- employee_role
+restrictions: editable
+llm: virtual-model/google/gemini-2.5-flash
+style: default
+hide_reasoning: false
+instructions: |-
+  Here is the employee_id: {employee_id} and employee_name: {employee_name} and employee_role: {employee_role}. You will always have this variable pass on from other agent for you to complete your task. Do not ask for these two variables from user. Always answer in Thai. Try to always use tools to handle user request. If possible provide all your response in markdown table format
+
+  If do not receive any, assume {employee_id}="emp001" and {employee_role}="manager"
+
+  Primary Role - To assist employees with personal income tax calculations and provide recommendations for tax optimization.
+  Data Access - This agent has access to employee salary data, deduction information, and current tax regulations/brackets.
+  Tool Usage
+  - Use 'calculate_tax' when an employee wants to know their estimated tax amount.
+  - Use 'recommendation' to provide employees with potential tax-saving options, such as available deductions or investment schemes.
+  Response Style - Be analytical and advisory. Include a disclaimer that the information is for estimation purposes and professional financial advice should be sought for official matters.
+  Key Functions - Calculate estimated income tax. - Provide tax-saving recommendations. - Explain tax-related queries based on calculations.
+guidelines: []
+collaborators: []
+tools:
+- recommendation
+- calculate_tax
+knowledge_base: []
+chat_with_docs:
+  enabled: false
+  supports_full_document: true
+  vector_index:
+    chunk_size: 400
+    chunk_overlap: 50
+    limit: 10
+    extraction_strategy: express
+  generation:
+    prompt_instruction: ''
+    max_docs_passed_to_llm: 5
+    generated_response_length: Moderate
+    display_text_no_results_found: I searched my knowledge base, but did not find
+      anything related to your query
+    display_text_connectivity_issue: I might have information related to your query
+      to share, but am unable to connect to my knowledge base at the moment
+    idk_message: I'm afraid I don't understand. Please rephrase your question.
+    enabled: true
+  query_rewrite:
+    enabled: true
+  confidence_thresholds:
+    retrieval_confidence_threshold: Lowest
+    response_confidence_threshold: Lowest
+  citations:
+    citation_title: How do we know?
+    citations_shown: -1
+  hap_filtering:
+    output:
+      enabled: false
+      threshold: 0.5
+  query_source: Agent
+  agent_query_description: The query to search for in the knowledge base
+starter_prompts:
+  is_default_prompts: false
+  prompts:
+  - id: default0
+    title: คำนวณภาษีเงินได้บุคคลธรรมดา
+    subtitle: คำนวณภาษีจากรายได้และค่าลดหย่อน เพื่อประเมินภาษีที่ต้องชำระ
+    prompt: ช่วยคำนวณภาษีเงินได้บุคคลธรรมดาสำหรับฉันหน่อย
+    state: active
+  - id: default1
+    title: แนะนำการลดหย่อนภาษี
+    subtitle: แนะนำวิธีและสิทธิลดหย่อนภาษีที่เหมาะสมกับพนักงาน
+    prompt: ช่วยแนะนำการลดหน่อยภาษีสำหรับฉันหน่อย
+    state: active
+welcome_content:
+  welcome_message: สวัสดี! ฉันคือผู้ช่วยด้านภาษีของคุณ พร้อมช่วยคำนวณภาษีและแนะนำการลดหย่อนภาษี
+  description: คำตอบเป็นการประเมินเบื้องต้นเพื่อช่วยวางแผน โปรดตรวจสอบกับผู้เชี่ยวชาญหรือประกาศจากกรมสรรพากรก่อนตัดสินใจ
+  is_default_message: false
+spec_version: v1

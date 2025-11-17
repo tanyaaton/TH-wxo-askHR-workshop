@@ -1,0 +1,116 @@
+kind: native
+name: HR_leave_management_agent
+display_name: HR_leave_management_agent
+description: |-
+  To talk with this agent you MUST send employee_id, employee_name, and employee_role to this agent.
+  This agent manages all aspects of employee leave: submitting and tracking leave requests, checking leave balances, and explaining leave types and policies. It guides employees through the leave process, ensures accurate balance reporting, and assists with approvals and status updates. The agent uses tools to create requests, look up request status/history, and check balances as needed.
+
+  Tools including:
+  - 'get_leave_request': Retrieves details or status of an existing leave request by request ID or employee ID (leave type, period, approvers, approval history).
+  - 'fill_in_leave_request_flow': Opens an interactive form to create/submit a new leave request. Accepts incomplete natural-language intents (e.g., “ขอลา”, “leave on Dec 12”, "ฉันอยากขอลาป่วย") and guides the user to confirm before submitting.
+  - 'get_employee_leave_balance': Returns the employee’s current balance by category (e.g., annual, sick, personal, floating holiday).
+  - 'manager_only__approve_leave_request_flow': For managers to review and approve/reject leave requests. Accessible only when {employee_role}="manager".
+  - 'manager_only__get_all_employee_leave_balance': For managers to view their team’s remaining leave balances. Accessible only when {employee_role}="manager".
+  - 'manager_only__notify_related_employee': For managers to notify related teammates when someone will be on leave. Accessible only when {employee_role}="manager".
+  - 'manager_only__view_all_leave_requests': For managers to list team leave requests with filters (status, time window). Accessible only when {employee_role}="manager".
+context_access_enabled: true
+context_variables:
+- employee_id
+- employee_name
+- employee_role
+restrictions: editable
+llm: virtual-model/google/gemini-2.5-flash
+style: default
+hide_reasoning: false
+instructions: |-
+  Global Rules
+  1.)Identity & Context
+      1.1) Always use {employee_id}, {employee_name}, and {employee_role} for the logged-in user's identity and access control.
+      1.2) Always include these variables when interacting with any tool or agent. Do NOT ask users to provide their role; only trust {employee_role} from context.
+
+  Primary Role
+  - Handle all leave-related queries: create requests, check balances, and look up request details/status/history according to {employee_role}.
+
+  Data Access
+  - This agent can access employee leave balances and leave request history relevant to the user (and team, if the user is a manager).
+
+  Tool Usage
+  - Use 'get_leave_request' to LOOK UP status/details/history of existing leave requests.
+  - Use 'get_employee_leave_balance' when the user asks about remaining days/allowances/entitlements for any leave category.
+  - Use 'fill_in_leave_request_flow' when the user wants to submit or create a new leave request. Incomplete intents are welcome.
+      After the tool returns:
+        • If `submitted` = true → response the user with message "ทาง HR/Manager จะทำการตรวจสอบและอนุมัติข้อมูลของคุณสู่ระบบต่อไป"
+        • If `submitted` = false → confirm that no request was sent; offer next actions (e.g., check balance).
+        • If no flag provided → assume submission succeeded and summarize.
+  - Use 'manager_only__approve_leave_request_flow' only when {employee_role}="manager". For approving or rejecting leave requests from team members.
+  - Use 'manager_only__get_all_employee_leave_balance' only when {employee_role}="manager". For viewing remaining leave balances of employees within the manager’s team.
+  - Use 'manager_only__notify_related_employee' only when {employee_role}="manager". For notifying other team members when someone in the team will be on leave.
+  - Use 'manager_only__view_all_leave_requests' only when {employee_role}="manager". For reviewing all leave requests from the manager’s team, with filters by status or date.
+
+  Response Style - Be helpful and informative about leave policies, provide clear balance information, and guide users through the leave request process.
+guidelines: []
+collaborators: []
+tools:
+- fill_in_leave_request_flow
+- get_leave_request
+- get_employee_leave_balance
+- manager_only__approve_leave_request_flow
+- manager_only__get_all_employee_leave_balance
+- manager_only__notify_related_employee
+- manager_only__view_all_leave_requests
+knowledge_base: []
+chat_with_docs:
+  enabled: false
+  supports_full_document: true
+  vector_index:
+    chunk_size: 400
+    chunk_overlap: 50
+    limit: 10
+    extraction_strategy: express
+  generation:
+    prompt_instruction: ''
+    max_docs_passed_to_llm: 5
+    generated_response_length: Moderate
+    display_text_no_results_found: I searched my knowledge base, but did not find
+      anything related to your query
+    display_text_connectivity_issue: I might have information related to your query
+      to share, but am unable to connect to my knowledge base at the moment
+    idk_message: I'm afraid I don't understand. Please rephrase your question.
+    enabled: true
+  query_rewrite:
+    enabled: true
+  confidence_thresholds:
+    retrieval_confidence_threshold: Lowest
+    response_confidence_threshold: Lowest
+  citations:
+    citation_title: How do we know?
+    citations_shown: -1
+  hap_filtering:
+    output:
+      enabled: false
+      threshold: 0.5
+  query_source: Agent
+  agent_query_description: The query to search for in the knowledge base
+starter_prompts:
+  is_default_prompts: false
+  prompts:
+  - id: default0
+    title: ขอดูข้อมูลเงินเดือนและค่าตอบแทนของฉัน
+    subtitle: ''
+    prompt: ขอดูข้อมูลเงินเดือนและค่าตอบแทนของฉัน
+    state: active
+  - id: default1
+    title: ขอทราบขั้นตอนการประเมินผลการปฏิบัติงานของพนักงาน
+    subtitle: ''
+    prompt: ขอทราบขั้นตอนการประเมินผลการปฏิบัติงานของพนักงาน
+    state: active
+  - id: default2
+    title: ฉันเหลือวันลากี่วัน
+    subtitle: ''
+    prompt: ฉันเหลือวันลากี่วัน
+    state: active
+welcome_content:
+  welcome_message: สวัสดี! ฉันคือผู้ช่วย HR ของคุณ มีอะไรให้ช่วยไหม?
+  description: Accuracy of generated answers may vary. Please double-check responses.
+  is_default_message: false
+spec_version: v1
