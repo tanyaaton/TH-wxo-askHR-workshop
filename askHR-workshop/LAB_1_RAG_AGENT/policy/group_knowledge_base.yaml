@@ -2,33 +2,35 @@ spec_version: v1
 kind: knowledge_base
 name: group_knowledge_base
 description: |
-  This knowledge base contains general information and company policies for employees.
-  - Comprehensive company leave policy manual for all employee levels — permanent, temporary, and probationary staff.
-  - Covers general principles, leave management via HRMS, approval rules, and disciplinary actions for unapproved absences.
-  - Defines annual, casual, earned, maternity, paternity, unpaid, compensatory, sabbatical, study, and military leave types.
-  - Specifies entitlement calculations, accumulation rules, and maximum carry-forward limits (e.g., 45 days for long-serving employees).
-  - Details maternity leave (26 weeks) and paternity leave (7 days) conditions, including adoption and surrogacy cases.
-  - Explains procedures for leave requests, approvals, extensions, and cancellations within HRMS.
-  - Includes guidelines for leave encashment and payout upon resignation or termination.
-  - Provides disciplinary framework for policy violations — warnings, suspension, or termination.
-  - Contains reporting and compliance mechanisms for HR, including monthly tracking and annual policy reviews.
-  - Appendices include standard leave forms, calculation tables, and required supporting documents (medical, adoption, education, etc.).
+  This knowledge base provides a comprehensive and authoritative reference for the company’s general policies and complete set of employee leave guidelines. It consolidates all essential rules, responsibilities, procedures, and eligibility criteria required for employees and managers to operate within the company’s standards.
+  - Defines the overarching principles governing workplace operations, including policy scope, working hours, employee conduct, confidentiality obligations, and safety responsibilities across all departments.
+  - Contains detailed leave policies applicable to all employee categories — permanent, contract, temporary, and probationary staff — ensuring consistent policy enforcement throughout the organization.
+  - Establishes clear definitions and conditions for all major leave types, such as annual leave, personal/business leave, sick leave, maternity leave, paternity leave, marriage leave, bereavement leave, leave without pay, compensatory off, statutory leaves, and other special leave categories recognized by law or internal regulations.
+  - Specifies eligibility criteria, required documentation, and approval steps for each leave type, including medical certificates for extended sick leave and advance-notice expectations for planned absences.
+  - Outlines employees’ responsibilities when requesting leave, including timely notification, accurate submission of supporting documents, compliance with HR procedures, and proper use of leave entitlements.
+  - Provides clear rules and disciplinary actions related to unauthorized absences, misuse of leave, unreported leave, or failure to follow established procedures.
+  - Clarifies managerial responsibilities for reviewing, approving, or rejecting leave requests based on operational needs, workforce planning, and adherence to company standards.
+  - States that the company reserves the right to revise, amend, or update leave policies in response to legal changes, compliance requirements, or evolving business needs.
+  - Serves as a unified policy reference designed to help employees understand their rights, obligations, behavioral expectations, and the correct processes concerning workplace conduct and leave management.
 
 documents:
-  - path: ./thai_policy.pdf
+  # - path: ./company_general_policy_extended.pdf
+# documents:
+  - path: ./thai_policy_latest.pdf
 
 
 vector_index:
   embeddings_model_name: intfloat/multilingual-e5-large
-  chunk_size: 100
+  chunk_size: 300
   chunk_overlap: 50
-  top_k: 10
-  extraction_strategy: standard
+  extraction_strategy: high_quality
 
 conversational_search_tool:
   language: "th"
   generation:
     enabled: False
+    generated_response_length: Verbose
+    max_docs_passed_to_llm: 10
   confidence_thresholds:
     retrieval_confidence_threshold: 'Low'
     response_confidence_threshold: 'Low'
@@ -36,4 +38,5 @@ conversational_search_tool:
     enabled: True
   citations:
     citations_shown: -1
+  supports_full_document: True
   
