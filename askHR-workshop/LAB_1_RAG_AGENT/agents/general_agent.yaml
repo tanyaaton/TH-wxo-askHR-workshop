@@ -4,7 +4,7 @@ name: general_agent
 description: >
     This agent handles general information related to Human Resources.
 llm: watsonx/meta-llama/llama-3-405b-instruct
-style: react
+style: default
 knowledge_base:
   - group_knowledge_base
 tools: []
