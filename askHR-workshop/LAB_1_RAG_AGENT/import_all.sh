@@ -2,7 +2,8 @@
 # orchestrate env activate metro-internal
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
-for kb_file in "${SCRIPT_DIR}"/group_policy/*.yaml; do
+for kb_file in "${SCRIPT_DIR}"/policy/*.yaml; do
+    echo "Importing knowledge base from $kb_file"
     [ -f "$kb_file" ] && orchestrate knowledge-bases import -f "$kb_file"
 done
 
