@@ -21,9 +21,6 @@ documents:
 
 vector_index:
   embeddings_model_name: intfloat/multilingual-e5-large
-  # chunk_size: 300
-  # chunk_overlap: 50
-  # extraction_strategy: high_quality
 
 conversational_search_tool:
   language: "th"
