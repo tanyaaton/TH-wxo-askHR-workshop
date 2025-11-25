@@ -1,0 +1,960 @@
+{
+  "spec": {
+    "kind": "flow",
+    "name": "update_personal_info_flow",
+    "initiators": [],
+    "description": "Update personal info (with flow builder). allow user to enter input via form input for each field. This tool will call 'update_personal_info' tool to enhance user experience with form input.",
+    "display_name": "update_personal_info_flow",
+    "input_schema": {
+      "type": "object",
+      "required": [
+        "employee_role",
+        "user_input"
+      ],
+      "properties": {
+        "user_input": {
+          "type": "string"
+        },
+        "employee_id": {
+          "type": "string",
+          "description": ""
+        },
+        "employee_role": {
+          "type": "string",
+          "description": "This determine whether the user is manager or employee. They will have access to different information and tools"
+        }
+      }
+    },
+    "output_schema": {}
+  },
+  "edges": [
+    {
+      "id": "c111f3ec-f5e9-411d-9fd3-0cf7476fbdfb",
+      "end": "prompt_6b4a2b1a-fea9-49b6-bf78-870a726d7850",
+      "start": "__start__"
+    },
+    {
+      "id": "9ac72b3f-f545-415e-87da-c68162020eed",
+      "end": "Branch 1",
+      "start": "UserActivity 2"
+    },
+    {
+      "id": "8330816e-6a57-4214-b28f-fec9cfb731ee",
+      "end": "UserActivity 2",
+      "start": "prompt_6b4a2b1a-fea9-49b6-bf78-870a726d7850"
+    },
+    {
+      "id": "360ad083-b6c1-466d-8128-fca1baff363e",
+      "end": "UserActivity 1",
+      "start": "Branch 1",
+      "display_name": "Yes"
+    },
+    {
+      "id": "d63a3a55-39d8-4ea2-a721-360bf3a9ec92",
+      "end": "UserActivity 3",
+      "start": "Branch 1",
+      "display_name": "No"
+    },
+    {
+      "id": "ffe2dc71-6a27-4a2f-9822-02ff238e39ae",
+      "end": "__end__",
+      "start": "UserActivity 3"
+    },
+    {
+      "id": "47a35e2c-8cde-49fc-b419-981e52408acc",
+      "end": "__end__",
+      "start": "UserActivity 1"
+    }
+  ],
+  "nodes": {
+    "__end__": {
+      "spec": {
+        "kind": "end",
+        "name": "__end__",
+        "position": {
+          "x": -183.84628664022893,
+          "y": 2908.3717777998695
+        }
+      }
+    },
+    "Branch 1": {
+      "spec": {
+        "kind": "branch",
+        "name": "Branch 1",
+        "position": {
+          "x": -8.97010927179474,
+          "y": 1951.2195187721954
+        },
+        "evaluator": {
+          "conditions": [
+            {
+              "default": false,
+              "edge_id": "360ad083-b6c1-466d-8128-fca1baff363e",
+              "metadata": {
+                "id": "4f45dbb9-f695-46a4-8a70-b80c17c1af54",
+                "conditions": [
+                  {
+                    "value": "True",
+                    "isValid": true,
+                    "dataType": "boolean",
+                    "operator": "is",
+                    "variableName": "flow[\"update-personal-info-flow\"][\"\u0e04\u0e38\u0e13\u0e22\u0e37\u0e19\u0e22\u0e31\u0e19\u0e17\u0e35\u0e48\u0e08\u0e30\u0e2d\u0e31\u0e1e\u0e40\u0e14\u0e15\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e2b\u0e23\u0e37\u0e2d\u0e44\u0e21\u0e48 (\u0e01\u0e23\u0e38\u0e13\u0e32\u0e15\u0e23\u0e27\u0e08\u0e2a\u0e2d\u0e1a\u0e04\u0e27\u0e32\u0e21\u0e16\u0e39\u0e01\u0e15\u0e49\u0e2d\u0e07\u0e02\u0e2d\u0e07\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25 \u0e17\u0e32\u0e07HR\u0e08\u0e30\u0e17\u0e33\u0e01\u0e32\u0e23\u0e2d\u0e19\u0e38\u0e21\u0e31\u0e15\u0e34\u0e41\u0e25\u0e30\u0e2d\u0e31\u0e1e\u0e40\u0e14\u0e17\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e2a\u0e39\u0e48\u0e23\u0e30\u0e1a\u0e1a\u0e15\u0e48\u0e2d\u0e44\u0e1b)\"].output.value"
+                  }
+                ]
+              },
+              "expression": "flow[\"update-personal-info-flow\"][\"\u0e04\u0e38\u0e13\u0e22\u0e37\u0e19\u0e22\u0e31\u0e19\u0e17\u0e35\u0e48\u0e08\u0e30\u0e2d\u0e31\u0e1e\u0e40\u0e14\u0e15\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e2b\u0e23\u0e37\u0e2d\u0e44\u0e21\u0e48 (\u0e01\u0e23\u0e38\u0e13\u0e32\u0e15\u0e23\u0e27\u0e08\u0e2a\u0e2d\u0e1a\u0e04\u0e27\u0e32\u0e21\u0e16\u0e39\u0e01\u0e15\u0e49\u0e2d\u0e07\u0e02\u0e2d\u0e07\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25 \u0e17\u0e32\u0e07HR\u0e08\u0e30\u0e17\u0e33\u0e01\u0e32\u0e23\u0e2d\u0e19\u0e38\u0e21\u0e31\u0e15\u0e34\u0e41\u0e25\u0e30\u0e2d\u0e31\u0e1e\u0e40\u0e14\u0e17\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e2a\u0e39\u0e48\u0e23\u0e30\u0e1a\u0e1a\u0e15\u0e48\u0e2d\u0e44\u0e1b)\"].output.value is True"
+            },
+            {
+              "default": true,
+              "edge_id": "d63a3a55-39d8-4ea2-a721-360bf3a9ec92",
+              "metadata": {
+                "id": "035f8fd2-ac23-4930-a707-2089931d7e2f"
+              }
+            }
+          ]
+        },
+        "display_name": "confirm to update personal info ?",
+        "match_policy": "FIRST_MATCH"
+      }
+    },
+    "__start__": {
+      "spec": {
+        "kind": "start",
+        "name": "__start__",
+        "position": {
+          "x": -26.26623223176182,
+          "y": 371.0063589844536
+        }
+      }
+    },
+    "UserActivity 1": {
+      "spec": {
+        "kind": "user_flow",
+        "name": "UserActivity 1",
+        "position": {
+          "x": -558.0607535048039,
+          "y": 2164.6385639543932
+        },
+        "dimensions": {
+          "width": 286,
+          "height": 448
+        },
+        "initiators": [],
+        "display_name": "confirmed to update"
+      },
+      "edges": [
+        {
+          "id": "e64c1596-7083-4cd8-93d2-3fe8b4dbd096",
+          "end": "tool_708cec18-6309-4188-920c-c5d02777dd14",
+          "start": "UserActivity 1__start__"
+        },
+        {
+          "id": "82badc6c-503b-44ed-b7dd-dd477386117e",
+          "end": "UserActivity 1__end__",
+          "start": "tool_708cec18-6309-4188-920c-c5d02777dd14"
+        }
+      ],
+      "nodes": {
+        "UserActivity 1__end__": {
+          "spec": {
+            "kind": "end",
+            "name": "UserActivity 1__end__",
+            "position": {
+              "x": 20,
+              "y": 400
+            }
+          }
+        },
+        "UserActivity 1__start__": {
+          "spec": {
+            "kind": "start",
+            "name": "UserActivity 1__start__",
+            "position": {
+              "x": 20,
+              "y": 0
+            }
+          }
+        },
+        "tool_708cec18-6309-4188-920c-c5d02777dd14": {
+          "spec": {
+            "kind": "tool",
+            "name": "tool_708cec18-6309-4188-920c-c5d02777dd14",
+            "tool": "update_personal_info:9b7cbee4-84a1-404a-bbd2-cf8057d2c7d7",
+            "position": {
+              "x": 20,
+              "y": 200
+            },
+            "description": "Updates personal information for a specified employee in employee_personal_info.csv (case-insensitive).\nOnly the fields provided (not None) will be updated.\n\nSummary of Updatable Fields:\n    - first_name\n    - last_name\n    - phone_number\n    - email\n    - department\n    - job_title\n    - hire_date\n    - employment_status\n    - manager_id\n    - office_location",
+            "display_name": "update_personal_info",
+            "input_schema": {
+              "type": "object",
+              "required": [
+                "employee_id"
+              ],
+              "properties": {
+                "email": {
+                  "title": "Email"
+                },
+                "hire_date": {
+                  "title": "Hire Date"
+                },
+                "job_title": {
+                  "title": "Job Title"
+                },
+                "last_name": {
+                  "title": "Last Name"
+                },
+                "department": {
+                  "title": "Department"
+                },
+                "first_name": {
+                  "title": "First Name"
+                },
+                "manager_id": {
+                  "title": "Manager Id"
+                },
+                "employee_id": {
+                  "title": "Employee Id"
+                },
+                "phone_number": {
+                  "title": "Phone Number"
+                },
+                "office_location": {
+                  "title": "Office Location"
+                },
+                "employment_status": {
+                  "title": "Employment Status"
+                }
+              }
+            },
+            "output_schema": {
+              "type": "string",
+              "description": "Success or error message."
+            },
+            "error_handler_config": {
+              "max_retries": 0,
+              "error_message": "Something went wrong while running 'update_personal_info'",
+              "retry_interval": 1000
+            }
+          },
+          "input_map": {
+            "spec": {
+              "maps": [],
+              "name": "",
+              "fallback_strategy": "ask_the_user"
+            }
+          }
+        }
+      },
+      "schemas": {}
+    },
+    "UserActivity 2": {
+      "spec": {
+        "kind": "user_flow",
+        "name": "UserActivity 2",
+        "position": {
+          "x": -283.47010927179474,
+          "y": 734.0701160669848
+        },
+        "dimensions": {
+          "width": 653,
+          "height": 1169
+        },
+        "initiators": [],
+        "display_name": "update-personal-info-flow"
+      },
+      "edges": [
+        {
+          "id": "95b6d31c-19ad-4d3d-8cc1-31c47341c59d",
+          "end": "prompt_2ab60e88-e729-44f2-a92b-b3880161cf2c",
+          "start": "UserActivity 2__start__"
+        },
+        {
+          "id": "b7b6806a-fc15-4be1-b6ee-ac9db240e5bd",
+          "end": "CodeBlock 1",
+          "start": "user_28fb492f-0af6-41d9-9254-8c09510f1fcd"
+        },
+        {
+          "id": "79af2725-082e-46d1-a6ff-1f39430e1d64",
+          "end": "user_be57d5a8-d305-49a9-ad40-5fbdb2ff567d",
+          "start": "user_e05c39e2-82b0-4d67-a2bc-e66d73fd913c"
+        },
+        {
+          "id": "38215a09-f0ef-4558-a542-e59e1afcc6c9",
+          "end": "UserActivity 2__end__",
+          "start": "user_be57d5a8-d305-49a9-ad40-5fbdb2ff567d"
+        },
+        {
+          "id": "fd29fded-6853-4def-9b20-c44c2ea8a07d",
+          "end": "user_e05c39e2-82b0-4d67-a2bc-e66d73fd913c",
+          "start": "CodeBlock 1"
+        },
+        {
+          "id": "cad58620-aae1-4475-aa02-458956f1f584",
+          "end": "user_28fb492f-0af6-41d9-9254-8c09510f1fcd",
+          "start": "prompt_2ab60e88-e729-44f2-a92b-b3880161cf2c"
+        }
+      ],
+      "nodes": {
+        "CodeBlock 1": {
+          "spec": {
+            "fn": "form_output = flow[\"update-personal-info-flow\"][\"\u0e41\u0e1a\u0e1a\u0e1f\u0e2d\u0e23\u0e4c\u0e21\u0e2d\u0e31\u0e1e\u0e40\u0e14\u0e15\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e2a\u0e48\u0e27\u0e19\u0e15\u0e31\u0e27\"].output\n\nfirstname_str = form_output.get(\"First Name\")\nlastname_str = form_output.get(\"Last Name\")\nphone_str = form_output.get(\"Phone Number\")\nemail_str = form_output.get(\"Work Email\")\n\nif not firstname_str:\n    firstname_str = \"-\"\n\nif not lastname_str:\n    lastname_str = \"-\"\n\nif not phone_str:\n    phone_str = \"-\"\n\nif not email_str:\n    email_str = \"-\"\n\nself.output.transformed_firstname = firstname_str\nself.output.transformed_lastname = lastname_str\nself.output.transformed_phone_number = phone_str\nself.output.transformed_email = email_str",
+            "kind": "script",
+            "name": "CodeBlock 1",
+            "position": {
+              "x": 220.85173156386696,
+              "y": 583.6790247808483
+            },
+            "display_name": "Code block 1",
+            "output_schema": {
+              "type": "object",
+              "properties": {
+                "transformed_email": {
+                  "type": "string",
+                  "description": ""
+                },
+                "transformed_lastname": {
+                  "type": "string",
+                  "description": ""
+                },
+                "transformed_firstname": {
+                  "type": "string",
+                  "description": ""
+                },
+                "transformed_phone_number": {
+                  "type": "string",
+                  "description": ""
+                }
+              }
+            }
+          }
+        },
+        "UserActivity 2__end__": {
+          "spec": {
+            "kind": "end",
+            "name": "UserActivity 2__end__",
+            "position": {
+              "x": 203.5,
+              "y": 1116.3276799986706
+            }
+          }
+        },
+        "UserActivity 2__start__": {
+          "spec": {
+            "kind": "start",
+            "name": "UserActivity 2__start__",
+            "position": {
+              "x": 203.5,
+              "y": 0
+            }
+          }
+        },
+        "user_28fb492f-0af6-41d9-9254-8c09510f1fcd": {
+          "spec": {
+            "form": {
+              "name": "form_1745945a-b129-4345-aa75-30f20f2787cb",
+              "fields": [
+                {
+                  "kind": "text",
+                  "name": "field_aa6c075c-4972-4707-b1c1-0b6e2b541217",
+                  "uiSchema": {
+                    "ui:title": "First Name",
+                    "ui:widget": "TextWidget",
+                    "ui:placeholder": "\u0e1b\u0e25\u0e48\u0e2d\u0e22\u0e27\u0e48\u0e32\u0e07\u0e2b\u0e32\u0e01\u0e44\u0e21\u0e48\u0e15\u0e49\u0e2d\u0e07\u0e01\u0e32\u0e23\u0e2d\u0e31\u0e1e\u0e40\u0e14\u0e15"
+                  },
+                  "direction": "input",
+                  "input_map": {
+                    "spec": {
+                      "maps": [
+                        {
+                          "metadata": {
+                            "assignmentType": "variable"
+                          },
+                          "has-no-value": false,
+                          "target_variable": "self.input.default",
+                          "value_expression": "flow[\"extract update field\"].output.update_dto.firstname"
+                        }
+                      ],
+                      "name": ""
+                    }
+                  },
+                  "display_name": "First Name",
+                  "input_schema": {
+                    "type": "object",
+                    "required": [],
+                    "properties": {
+                      "default": {
+                        "type": "string"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "output_schema": {
+                    "type": "object",
+                    "required": [
+                      "value"
+                    ],
+                    "properties": {
+                      "value": {
+                        "type": "string"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "uiSchemaParkingLot": {
+                    "ui:help": "helprt"
+                  }
+                },
+                {
+                  "kind": "text",
+                  "name": "field_6746518e-b760-4a48-9472-f3691979151c",
+                  "uiSchema": {
+                    "ui:title": "Last Name",
+                    "ui:widget": "TextWidget",
+                    "ui:placeholder": "\u0e1b\u0e25\u0e48\u0e2d\u0e22\u0e27\u0e48\u0e32\u0e07\u0e2b\u0e32\u0e01\u0e44\u0e21\u0e48\u0e15\u0e49\u0e2d\u0e07\u0e01\u0e32\u0e23\u0e2d\u0e31\u0e1e\u0e40\u0e14\u0e15"
+                  },
+                  "direction": "input",
+                  "input_map": {
+                    "spec": {
+                      "maps": [
+                        {
+                          "metadata": {
+                            "assignmentType": "variable"
+                          },
+                          "has-no-value": false,
+                          "target_variable": "self.input.default",
+                          "value_expression": "flow[\"extract update field\"].output.update_dto.lastname"
+                        }
+                      ],
+                      "name": ""
+                    }
+                  },
+                  "display_name": "Last Name",
+                  "input_schema": {
+                    "type": "object",
+                    "required": [],
+                    "properties": {
+                      "default": {
+                        "type": "string"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "output_schema": {
+                    "type": "object",
+                    "required": [
+                      "value"
+                    ],
+                    "properties": {
+                      "value": {
+                        "type": "string"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "uiSchemaParkingLot": {}
+                },
+                {
+                  "kind": "text",
+                  "name": "field_5f70749a-f224-486f-914e-b416c8d3ef80",
+                  "uiSchema": {
+                    "ui:title": "Work Email",
+                    "ui:widget": "TextWidget",
+                    "ui:placeholder": "\u0e1b\u0e25\u0e48\u0e2d\u0e22\u0e27\u0e48\u0e32\u0e07\u0e2b\u0e32\u0e01\u0e44\u0e21\u0e48\u0e15\u0e49\u0e2d\u0e07\u0e01\u0e32\u0e23\u0e2d\u0e31\u0e1e\u0e40\u0e14\u0e15"
+                  },
+                  "direction": "input",
+                  "input_map": {
+                    "spec": {
+                      "maps": [
+                        {
+                          "metadata": {
+                            "assignmentType": "variable"
+                          },
+                          "has-no-value": false,
+                          "target_variable": "self.input.default",
+                          "value_expression": "flow[\"extract update field\"].output.update_dto.email"
+                        }
+                      ],
+                      "name": ""
+                    }
+                  },
+                  "display_name": "Work Email",
+                  "input_schema": {
+                    "type": "object",
+                    "required": [],
+                    "properties": {
+                      "default": {
+                        "type": "string"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "output_schema": {
+                    "type": "object",
+                    "required": [
+                      "value"
+                    ],
+                    "properties": {
+                      "value": {
+                        "type": "string"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "uiSchemaParkingLot": {}
+                },
+                {
+                  "kind": "text",
+                  "name": "field_fd4e8246-a1b5-473d-92ba-e99fedc3e33f",
+                  "uiSchema": {
+                    "ui:title": "Phone Number",
+                    "ui:widget": "TextWidget",
+                    "ui:placeholder": "\u0e1b\u0e25\u0e48\u0e2d\u0e22\u0e27\u0e48\u0e32\u0e07\u0e2b\u0e32\u0e01\u0e44\u0e21\u0e48\u0e15\u0e49\u0e2d\u0e07\u0e01\u0e32\u0e23\u0e2d\u0e31\u0e1e\u0e40\u0e14\u0e15"
+                  },
+                  "direction": "input",
+                  "input_map": {
+                    "spec": {
+                      "maps": [
+                        {
+                          "metadata": {
+                            "assignmentType": "variable"
+                          },
+                          "has-no-value": false,
+                          "target_variable": "self.input.default",
+                          "value_expression": "flow[\"extract update field\"].output.update_dto.phone_number"
+                        }
+                      ],
+                      "name": ""
+                    }
+                  },
+                  "display_name": "Phone Number",
+                  "input_schema": {
+                    "type": "object",
+                    "required": [],
+                    "properties": {
+                      "default": {
+                        "type": "string"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "output_schema": {
+                    "type": "object",
+                    "required": [
+                      "value"
+                    ],
+                    "properties": {
+                      "value": {
+                        "type": "string"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "uiSchemaParkingLot": {}
+                }
+              ],
+              "buttons": [
+                {
+                  "kind": "submit",
+                  "name": "submit",
+                  "edge_id": "b7b6806a-fc15-4be1-b6ee-ac9db240e5bd",
+                  "visible": true,
+                  "display_name": "Submit"
+                },
+                {
+                  "kind": "cancel",
+                  "name": "cancel",
+                  "visible": false,
+                  "display_name": "Cancel"
+                }
+              ],
+              "jsonSchema": {
+                "type": "object",
+                "required": [],
+                "properties": {
+                  "field_5f70749a-f224-486f-914e-b416c8d3ef80": {
+                    "type": "string",
+                    "title": "Work Email"
+                  },
+                  "field_6746518e-b760-4a48-9472-f3691979151c": {
+                    "type": "string",
+                    "title": "Last Name"
+                  },
+                  "field_aa6c075c-4972-4707-b1c1-0b6e2b541217": {
+                    "type": "string",
+                    "title": "First Name"
+                  },
+                  "field_fd4e8246-a1b5-473d-92ba-e99fedc3e33f": {
+                    "type": "string",
+                    "title": "Phone Number"
+                  }
+                },
+                "description": "\u0e01\u0e23\u0e38\u0e13\u0e32\u0e15\u0e23\u0e27\u0e08\u0e2a\u0e2d\u0e1a\u0e04\u0e27\u0e32\u0e21\u0e16\u0e39\u0e01\u0e15\u0e49\u0e2d\u0e07\u0e02\u0e2d\u0e07\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25 \u0e2b\u0e23\u0e37\u0e2d\u0e40\u0e1e\u0e34\u0e48\u0e21\u0e40\u0e15\u0e34\u0e21\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e2d\u0e37\u0e48\u0e19\u0e17\u0e35\u0e48\u0e04\u0e38\u0e13\u0e15\u0e49\u0e2d\u0e07\u0e01\u0e32\u0e23\u0e2d\u0e31\u0e1e\u0e40\u0e14\u0e15",
+                "additionalProperties": false
+              },
+              "display_name": "Form 1"
+            },
+            "kind": "user",
+            "name": "user_28fb492f-0af6-41d9-9254-8c09510f1fcd",
+            "fields": [],
+            "owners": [],
+            "position": {
+              "x": 195.16678035539553,
+              "y": 393.08369548968267
+            },
+            "display_name": "\u0e41\u0e1a\u0e1a\u0e1f\u0e2d\u0e23\u0e4c\u0e21\u0e2d\u0e31\u0e1e\u0e40\u0e14\u0e15\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e2a\u0e48\u0e27\u0e19\u0e15\u0e31\u0e27"
+          }
+        },
+        "user_be57d5a8-d305-49a9-ad40-5fbdb2ff567d": {
+          "spec": {
+            "kind": "user",
+            "name": "user_be57d5a8-d305-49a9-ad40-5fbdb2ff567d",
+            "fields": [
+              {
+                "kind": "boolean",
+                "name": "boolean_fa98171d-a924-46a4-91d7-8d79553933a9",
+                "direction": "input",
+                "output_schema": {
+                  "type": "object",
+                  "required": [
+                    "value"
+                  ],
+                  "properties": {
+                    "value": {
+                      "type": "boolean"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            ],
+            "owners": [],
+            "position": {
+              "x": 251.60599227287133,
+              "y": 851.4690705096485
+            },
+            "display_name": "\u0e04\u0e38\u0e13\u0e22\u0e37\u0e19\u0e22\u0e31\u0e19\u0e17\u0e35\u0e48\u0e08\u0e30\u0e2d\u0e31\u0e1e\u0e40\u0e14\u0e15\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e2b\u0e23\u0e37\u0e2d\u0e44\u0e21\u0e48 (\u0e01\u0e23\u0e38\u0e13\u0e32\u0e15\u0e23\u0e27\u0e08\u0e2a\u0e2d\u0e1a\u0e04\u0e27\u0e32\u0e21\u0e16\u0e39\u0e01\u0e15\u0e49\u0e2d\u0e07\u0e02\u0e2d\u0e07\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25 \u0e17\u0e32\u0e07HR\u0e08\u0e30\u0e17\u0e33\u0e01\u0e32\u0e23\u0e2d\u0e19\u0e38\u0e21\u0e31\u0e15\u0e34\u0e41\u0e25\u0e30\u0e2d\u0e31\u0e1e\u0e40\u0e14\u0e17\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e2a\u0e39\u0e48\u0e23\u0e30\u0e1a\u0e1a\u0e15\u0e48\u0e2d\u0e44\u0e1b)"
+          }
+        },
+        "user_e05c39e2-82b0-4d67-a2bc-e66d73fd913c": {
+          "spec": {
+            "kind": "user",
+            "name": "user_e05c39e2-82b0-4d67-a2bc-e66d73fd913c",
+            "fields": [
+              {
+                "kind": "text",
+                "name": "text_output_d17fe63e-e422-4c11-a3b5-5dcfefe5b078",
+                "text": "| Field | Original Value | Updated Value |                                                                                                    \n| :--- | :--- | :--- |                                                                                               \n| First Name |{flow[\"update-personal-info-flow\"][\"Generative prompt\"].output.original_data.original_First_name} |{flow[\"update-personal-info-flow\"][\"Code block 1\"].output.transformed_firstname} |                                                                                                   \n| Last Name | {flow[\"update-personal-info-flow\"][\"Generative prompt\"].output.original_data.original_Last_name}|{flow[\"update-personal-info-flow\"][\"Code block 1\"].output.transformed_lastname} |                                                                                          \n| Work Email | {flow[\"update-personal-info-flow\"][\"Generative prompt\"].output.original_data.original_Email}|{flow[\"update-personal-info-flow\"][\"Code block 1\"].output.transformed_email} |                                                                                                    \n| Phone Number | {flow[\"update-personal-info-flow\"][\"Generative prompt\"].output.original_data.original_Phone_number}|{flow[\"update-personal-info-flow\"][\"Code block 1\"].output.transformed_phone_number} |",
+                "direction": "output",
+                "input_schema": {
+                  "type": "object",
+                  "required": [
+                    "value"
+                  ],
+                  "properties": {
+                    "value": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            ],
+            "owners": [],
+            "position": {
+              "x": 250.40676651876902,
+              "y": 723
+            },
+            "display_name": "review changes"
+          }
+        },
+        "prompt_2ab60e88-e729-44f2-a92b-b3880161cf2c": {
+          "spec": {
+            "llm": "watsonx/meta-llama/llama-3-2-90b-vision-instruct",
+            "kind": "prompt",
+            "name": "prompt_2ab60e88-e729-44f2-a92b-b3880161cf2c",
+            "metadata": {
+              "creativity_slider_position": "5",
+              "creativity_slider_manual_override": false
+            },
+            "position": {
+              "x": 165.9992465884604,
+              "y": 178.3160848128988
+            },
+            "description": "",
+            "user_prompt": "{employee_id}",
+            "display_name": "Generative prompt",
+            "input_schema": {
+              "type": "object",
+              "required": [
+                "employee_id"
+              ],
+              "properties": {
+                "employee_id": {
+                  "type": "string",
+                  "description": ""
+                }
+              }
+            },
+            "output_schema": {
+              "type": "object",
+              "properties": {
+                "original_data": {
+                  "type": "object",
+                  "properties": {
+                    "original_Email": {
+                      "type": "string"
+                    },
+                    "original_Last_name": {
+                      "type": "string"
+                    },
+                    "original_First_name": {
+                      "type": "string"
+                    },
+                    "original_Phone_number": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "this is the original data of the employee before it is update"
+                }
+              }
+            },
+            "system_prompt": "The following is the original data of 5 employee in list format:['employee_id', 'first_name', 'last_name', 'phone_number', 'email']\n\nDATA:\nemployee_1 = ['EMP001', 'John', 'Smith', '+1-555-0101', 'john.smith@techcorp.com']\n\nemployee_2 = ['EMP002', 'Sarah', 'Johnson', '+1-555-0102', 'sarah.johnson@techcorp.com']\n\nemployee_3 = ['EMP003', 'Michael', 'Chen', '+1-555-0103', 'michael.chen@techcorp.com']\n\nemployee_4 = ['EMP004', 'Lisa', 'Park', '+1-555-0104', 'lisa.park@techcorp.com']\n\nemployee_5 = ['EMP005', 'Robert', 'Kim', '+1-555-0105', 'robert.kim@techcorp.com']\n\n\n\n\nYou will be given employee_id, your job is to return the information on the employee using the given data. return the following variables in json format:\n- \"original_First_name\"\n- \"original_Last_name\"\n- \"original_Email\"\n- \"original_Phone_number\"\n",
+            "llm_parameters": {
+              "top_k": 30,
+              "top_p": 0.7,
+              "temperature": 0.4,
+              "max_new_tokens": 200,
+              "min_new_tokens": 50,
+              "stop_sequences": [
+                "Human",
+                "AI"
+              ]
+            },
+            "prompt_examples": [
+              {
+                "input": "emp001",
+                "enabled": true,
+                "expected_output": "{\n  \"original_First_name\":\"John\",\n  \"original_Last_name\": \"Smith\",\n  \"original_Email\": \"smith@techcorp.com\",\n  \"original_Phone_number\": \"+1-555-0101\"\n}\n"
+              },
+              {
+                "input": "emp002",
+                "enabled": true,
+                "expected_output": "{\n  \"original_First_name\": \"Sarah\",\n  \"original_Last_name\": \"Johnson\",\n  \"original_Email\": \"sarah.johnson@techcorp.com\",\n  \"original_Phone_number\": \"+1-555-0102\"\n}"
+              },
+              {
+                "input": "EMP005",
+                "enabled": true,
+                "expected_output": "{\n  \"original_First_name\": \"Robert\",\n  \"original_Last_name\": \"Kim\",\n  \"original_Email\": \"robert.kim@techcorp.com\",\n  \"original_Phone_number\": \"+1-555-0105\"\n}"
+              }
+            ],
+            "test_input_data": {
+              "employee_id": "EMP005"
+            },
+            "error_handler_config": {
+              "max_retries": 0,
+              "error_message": "Something went wrong while running 'Generative prompt'",
+              "retry_interval": 1000
+            }
+          }
+        }
+      },
+      "schemas": {}
+    },
+    "UserActivity 3": {
+      "spec": {
+        "kind": "user_flow",
+        "name": "UserActivity 3",
+        "position": {
+          "x": 326.0064374128493,
+          "y": 2174.9304540128587
+        },
+        "dimensions": {
+          "width": 286,
+          "height": 320
+        },
+        "initiators": [],
+        "display_name": "canceled to update"
+      },
+      "edges": [
+        {
+          "id": "ef044420-db3f-4cd4-8df3-c0eca2579786",
+          "end": "user_404934ce-c11b-44de-8d5b-8c76237a1a8f",
+          "start": "UserActivity 3__start__"
+        },
+        {
+          "id": "616d42af-ca2c-4ffc-b728-5c364a5de352",
+          "end": "UserActivity 3__end__",
+          "start": "user_404934ce-c11b-44de-8d5b-8c76237a1a8f"
+        }
+      ],
+      "nodes": {
+        "UserActivity 3__end__": {
+          "spec": {
+            "kind": "end",
+            "name": "UserActivity 3__end__",
+            "position": {
+              "x": 20,
+              "y": 254
+            }
+          }
+        },
+        "UserActivity 3__start__": {
+          "spec": {
+            "kind": "start",
+            "name": "UserActivity 3__start__",
+            "position": {
+              "x": 20,
+              "y": 0
+            }
+          }
+        },
+        "user_404934ce-c11b-44de-8d5b-8c76237a1a8f": {
+          "spec": {
+            "kind": "user",
+            "name": "user_404934ce-c11b-44de-8d5b-8c76237a1a8f",
+            "fields": [
+              {
+                "kind": "text",
+                "name": "text_output_a9a55833-200b-4bf1-8dad-3fb4d48b6ad3",
+                "text": "\u0e22\u0e01\u0e40\u0e25\u0e34\u0e01\u0e01\u0e32\u0e23\u0e2d\u0e31\u0e1e\u0e40\u0e14\u0e15\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e2a\u0e48\u0e27\u0e19\u0e15\u0e31\u0e27\u0e41\u0e25\u0e49\u0e27 \u0e16\u0e49\u0e32\u0e04\u0e38\u0e13\u0e15\u0e49\u0e2d\u0e07\u0e01\u0e32\u0e23\u0e2d\u0e31\u0e1e\u0e40\u0e14\u0e15\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e2a\u0e48\u0e27\u0e19\u0e15\u0e31\u0e27\u0e2d\u0e35\u0e01\u0e04\u0e23\u0e31\u0e49\u0e07 \u0e01\u0e23\u0e38\u0e13\u0e32\u0e41\u0e08\u0e49\u0e07\u0e40\u0e23\u0e32\u0e44\u0e14\u0e49\u0e40\u0e25\u0e22",
+                "direction": "output",
+                "input_schema": {
+                  "type": "object",
+                  "required": [
+                    "value"
+                  ],
+                  "properties": {
+                    "value": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            ],
+            "owners": [],
+            "position": {
+              "x": 20,
+              "y": 108
+            },
+            "display_name": "canceled message"
+          }
+        }
+      },
+      "schemas": {}
+    },
+    "prompt_6b4a2b1a-fea9-49b6-bf78-870a726d7850": {
+      "spec": {
+        "llm": "virtual-model/google/gemini-2.5-flash",
+        "kind": "prompt",
+        "name": "prompt_6b4a2b1a-fea9-49b6-bf78-870a726d7850",
+        "metadata": {
+          "creativity_slider_position": "5",
+          "creativity_slider_manual_override": false
+        },
+        "position": {
+          "x": -79.26623223176182,
+          "y": 555.0063589844535
+        },
+        "test_data": [
+          {
+            "value": "\u0e02\u0e2d\u0e2d\u0e31\u0e1e\u0e40\u0e14\u0e17\u0e21\u0e37\u0e2d\u0e16\u0e37\u0e2d 0896674635",
+            "source": "self.input.user_input"
+          }
+        ],
+        "description": "",
+        "user_prompt": "{self.input.user_input}",
+        "display_name": "extract update field",
+        "input_schema": {
+          "type": "object",
+          "required": [
+            "user_input"
+          ],
+          "properties": {
+            "user_input": {
+              "type": "string",
+              "description": ""
+            }
+          }
+        },
+        "output_schema": {
+          "type": "object",
+          "properties": {
+            "update_dto": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string"
+                },
+                "lastname": {
+                  "type": "string"
+                },
+                "firstname": {
+                  "type": "string"
+                },
+                "phone_number": {
+                  "type": "string"
+                }
+              },
+              "description": ""
+            }
+          }
+        },
+        "system_prompt": "You are an expert entity extraction model. You will recieve a user query who would like to update their persnal information. Your task is to the 4 variables that they want to update:\n-`firstname`: new user's first name that they want to change to\n-`lastname` : new user's last name that they want to change to\n-`phone_number`: new user's phone_number  that they want to change to\n-`email` : new user's email that they want to change to\nRespond only with a single JSON object. If a value is not found, use blank string `\"\"` for that key.",
+        "llm_parameters": {
+          "top_k": 30,
+          "top_p": 0.7,
+          "temperature": 0.4,
+          "max_new_tokens": 200,
+          "min_new_tokens": 50,
+          "stop_sequences": [
+            "Human",
+            "AI"
+          ]
+        },
+        "prompt_examples": [
+          {
+            "input": "\u0e02\u0e2d\u0e40\u0e1b\u0e25\u0e35\u0e48\u0e22\u0e19\u0e0a\u0e37\u0e48\u0e2d\u0e08\u0e23\u0e34\u0e07\u0e40\u0e1b\u0e47\u0e19 \u0e18\u0e31\u0e0d\u0e18\u0e23\n",
+            "enabled": true,
+            "expected_output": "{\n  \"email\": \"\",\n  \"lastname\": \"\",\n  \"firstname\": \"\u0e18\u0e31\u0e0d\u0e18\u0e23\",\n  \"phone_number\": \"\"\n}"
+          },
+          {
+            "input": "\u0e02\u0e2d\u0e2d\u0e31\u0e1e\u0e40\u0e14\u0e17\u0e2d\u0e35\u0e40\u0e21\u0e25",
+            "enabled": true,
+            "expected_output": "{\n  \"email\": \"\",\n  \"lastname\": \"\",\n  \"firstname\": \"\",\n  \"phone_number\": \"\"\n}"
+          },
+          {
+            "input": "\u0e02\u0e2d\u0e2d\u0e31\u0e1e\u0e40\u0e14\u0e17\u0e21\u0e37\u0e2d\u0e16\u0e37\u0e2d 0896674635",
+            "enabled": true,
+            "expected_output": "{\n  \"email\": \"\",\n  \"lastname\": \"\",\n  \"firstname\": \"\",\n  \"phone_number\": \"0896674635\"\n}"
+          }
+        ],
+        "error_handler_config": {
+          "max_retries": 0,
+          "error_message": "Something went wrong while running 'extract update field'",
+          "retry_interval": 1000
+        }
+      }
+    }
+  },
+  "schemas": {},
+  "metadata": {
+    "source_kind": "ui"
+  },
+  "output_map": {
+    "spec": {
+      "maps": [
+        {
+          "metadata": {
+            "assignmentType": "variable"
+          },
+          "has-no-value": false,
+          "target_variable": "self.output.is_success",
+          "value_expression": "flow[\"update-personal-info-flow\"][\"\u0e04\u0e38\u0e13\u0e22\u0e37\u0e19\u0e22\u0e31\u0e19\u0e17\u0e35\u0e48\u0e08\u0e30\u0e2d\u0e31\u0e1e\u0e40\u0e14\u0e15\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e2b\u0e23\u0e37\u0e2d\u0e44\u0e21\u0e48 (\u0e01\u0e23\u0e38\u0e13\u0e32\u0e15\u0e23\u0e27\u0e08\u0e2a\u0e2d\u0e1a\u0e04\u0e27\u0e32\u0e21\u0e16\u0e39\u0e01\u0e15\u0e49\u0e2d\u0e07\u0e02\u0e2d\u0e07\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25 \u0e17\u0e32\u0e07HR\u0e08\u0e30\u0e17\u0e33\u0e01\u0e32\u0e23\u0e2d\u0e19\u0e38\u0e21\u0e31\u0e15\u0e34\u0e41\u0e25\u0e30\u0e2d\u0e31\u0e1e\u0e40\u0e14\u0e17\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e2a\u0e39\u0e48\u0e23\u0e30\u0e1a\u0e1a\u0e15\u0e48\u0e2d\u0e44\u0e1b)\"].output.value"
+        }
+      ],
+      "name": ""
+    }
+  }
+}

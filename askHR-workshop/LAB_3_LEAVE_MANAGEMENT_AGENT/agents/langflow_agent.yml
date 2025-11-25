@@ -1,0 +1,15 @@
+kind: native
+name: langflow_agent_2
+display_name: Tutorial Langflow Agent_2
+description: Tutorial Langflow Agent_2
+context_access_enabled: true
+context_variables: []
+llm: watsonx/meta-llama/llama-3-405b-instruct 
+style: default
+instructions: ''
+guidelines: []
+collaborators: []
+tools:
+- Leave_balance
+knowledge_base: []
+spec_version: v1

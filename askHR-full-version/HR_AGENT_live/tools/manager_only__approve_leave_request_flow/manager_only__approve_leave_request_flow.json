@@ -1,0 +1,717 @@
+{
+  "spec": {
+    "kind": "flow",
+    "name": "manager_only__approve_leave_request_flow",
+    "initiators": [],
+    "description": "Use this tool when user who is manager seem to wants to approve or deny any leave request from your team. The request does not has to be complete (eg. \u0e09\u0e31\u0e19\u0e15\u0e49\u0e2d\u0e07\u0e01\u0e32\u0e23\u0e2d\u0e19\u0e38\u0e21\u0e31\u0e15\u0e34\u0e04\u0e33\u0e02\u0e2d\u0e25\u0e32, \u0e2d\u0e22\u0e32\u0e01\u0e1b\u0e0f\u0e34\u0e40\u0e2a\u0e17\u0e04\u0e33\u0e02\u0e2d\u0e25\u0e32\u0e02\u0e2d\u0e07\u0e2b\u0e25\u0e32\u0e22\u0e04\u0e19, \u0e2d\u0e19\u0e38\u0e21\u0e31\u0e15\u0e34\u0e04\u0e33\u0e02\u0e2d\u0e25\u0e32\u0e27\u0e31\u0e19\u0e17\u0e35\u0e48 1 \u0e1e\u0e24\u0e29\u0e08\u0e34\u0e01\u0e32\u0e22\u0e19, \u0e15\u0e49\u0e2d\u0e07\u0e01\u0e32\u0e23\u0e2d\u0e19\u0e38\u0e21\u0e31\u0e15\u0e34\u0e04\u0e33\u0e02\u0e2d\u0e25\u0e32\u0e02\u0e2d\u0e07 Jane)\nPass on {employee_role} to check user access to this tool",
+    "display_name": "manager_only__approve_leave_request_flow",
+    "input_schema": {
+      "type": "object",
+      "required": [
+        "user_input",
+        "employee_role"
+      ],
+      "properties": {
+        "user_input": {
+          "type": "string",
+          "description": "user query related to approving leave request"
+        },
+        "employee_role": {
+          "type": "string",
+          "description": "Role of of the user. employee_role can be either \"employee\" or manager\""
+        }
+      }
+    },
+    "output_schema": {
+      "type": "object",
+      "properties": {
+        "leave_request_submitted": {
+          "type": "string",
+          "description": "This value will send out the leave detail that are submitted after it is complete."
+        }
+      }
+    }
+  },
+  "edges": [
+    {
+      "id": "028fbcdc-3c21-4d8d-8bbf-7af6a08d4376",
+      "end": "Branch 1",
+      "start": "__start__"
+    },
+    {
+      "id": "79d5e2e1-0c3b-4dff-89a9-9d2fcdc7954a",
+      "end": "__end__",
+      "start": "UserActivity 1"
+    },
+    {
+      "id": "e1d53811-094c-4252-9354-407211c33c89",
+      "end": "prompt_c4da23c4-b5c8-4285-9d43-1d01a3c3f3ae",
+      "start": "Branch 1",
+      "display_name": "manager"
+    },
+    {
+      "id": "6d02896d-6ed5-4a83-818d-25a545d0de48",
+      "end": "UserActivity 2",
+      "start": "Branch 1",
+      "display_name": "employee"
+    },
+    {
+      "id": "344acb8d-ce7e-4c5b-9b0a-5c5449740ff4",
+      "end": "__end__",
+      "start": "UserActivity 2"
+    },
+    {
+      "id": "d3f9e939-802d-4aec-aba5-df6042e8dde5",
+      "end": "UserActivity 1",
+      "start": "prompt_c4da23c4-b5c8-4285-9d43-1d01a3c3f3ae"
+    }
+  ],
+  "nodes": {
+    "__end__": {
+      "spec": {
+        "kind": "end",
+        "name": "__end__",
+        "position": {
+          "x": -214.34640496624667,
+          "y": 1491.5087949292924
+        }
+      }
+    },
+    "Branch 1": {
+      "spec": {
+        "kind": "branch",
+        "name": "Branch 1",
+        "position": {
+          "x": -188.1293006357519,
+          "y": 7.221456187505481
+        },
+        "evaluator": {
+          "conditions": [
+            {
+              "default": false,
+              "edge_id": "e1d53811-094c-4252-9354-407211c33c89",
+              "metadata": {
+                "id": "e0be03a7-4db9-4227-bde5-a12df87fcede",
+                "conditions": [
+                  {
+                    "value": "manager",
+                    "isValid": true,
+                    "dataType": "string",
+                    "operator": "==",
+                    "variableName": "flow.input.employee_role"
+                  }
+                ]
+              },
+              "expression": "flow.input.employee_role == \"manager\""
+            },
+            {
+              "default": true,
+              "edge_id": "6d02896d-6ed5-4a83-818d-25a545d0de48",
+              "metadata": {
+                "id": "276dbe3d-fcc3-4d8a-9ee9-a7bdf823c3d0"
+              }
+            }
+          ]
+        },
+        "display_name": "authorizing user",
+        "match_policy": "FIRST_MATCH"
+      }
+    },
+    "__start__": {
+      "spec": {
+        "kind": "start",
+        "name": "__start__",
+        "position": {
+          "x": -188.1293006357519,
+          "y": -162.77854381249452
+        }
+      }
+    },
+    "UserActivity 1": {
+      "spec": {
+        "kind": "user_flow",
+        "name": "UserActivity 1",
+        "position": {
+          "x": -441.5828214003943,
+          "y": 434.3231830912525
+        },
+        "dimensions": {
+          "width": 361,
+          "height": 750.9123152110024
+        },
+        "initiators": [],
+        "display_name": "User activity 1"
+      },
+      "edges": [
+        {
+          "id": "d3273b36-4327-4edb-b26e-a46633430fec",
+          "end": "user_a4e57aad-40f0-4bd8-a78e-f5f1b8cc2927",
+          "start": "UserActivity 1__start__"
+        },
+        {
+          "id": "d19b9416-8563-4699-b154-a801ec5596f2",
+          "end": "user_b0ab7aea-5358-4891-811f-b9002af49796",
+          "start": "user_a4e57aad-40f0-4bd8-a78e-f5f1b8cc2927"
+        },
+        {
+          "id": "5148071a-78ce-4e87-bd67-6cbabd831a3d",
+          "end": "user_070a8f5e-52b0-4370-a909-1c5c99cb9ce5",
+          "start": "user_b0ab7aea-5358-4891-811f-b9002af49796"
+        },
+        {
+          "id": "26be0c0d-e872-4f16-a6a1-4e7fdefe20c8",
+          "end": "UserActivity 1__end__",
+          "start": "user_070a8f5e-52b0-4370-a909-1c5c99cb9ce5"
+        }
+      ],
+      "nodes": {
+        "UserActivity 1__end__": {
+          "spec": {
+            "kind": "end",
+            "name": "UserActivity 1__end__",
+            "position": {
+              "x": 57.5,
+              "y": 684.9123152110024
+            }
+          }
+        },
+        "UserActivity 1__start__": {
+          "spec": {
+            "kind": "start",
+            "name": "UserActivity 1__start__",
+            "position": {
+              "x": 57.5,
+              "y": 0
+            }
+          }
+        },
+        "user_070a8f5e-52b0-4370-a909-1c5c99cb9ce5": {
+          "spec": {
+            "kind": "user",
+            "name": "user_070a8f5e-52b0-4370-a909-1c5c99cb9ce5",
+            "fields": [
+              {
+                "kind": "text",
+                "name": "text_output_8d4bc6b6-dbf0-4aca-9c91-6b406767a80e",
+                "text": "\u0e23\u0e32\u0e22\u0e01\u0e32\u0e23\u0e14\u0e49\u0e32\u0e19\u0e1a\u0e19\u0e44\u0e14\u0e49\u0e16\u0e38\u0e01\u0e14\u0e33\u0e40\u0e19\u0e34\u0e19\u0e01\u0e32\u0e23\u0e41\u0e25\u0e49\u0e27",
+                "direction": "output",
+                "input_schema": {
+                  "type": "object",
+                  "required": [
+                    "value"
+                  ],
+                  "properties": {
+                    "value": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            ],
+            "owners": [],
+            "position": {
+              "x": 54.441212503086376,
+              "y": 538.9123152110024
+            },
+            "display_name": "\u0e23\u0e32\u0e22\u0e01\u0e32\u0e23\u0e14\u0e49\u0e32\u0e19\u0e1a\u0e19\u0e44\u0e14\u0e49\u0e16\u0e38\u0e01\u0e14\u0e33\u0e40\u0e19\u0e34\u0e19\u0e01\u0e32\u0e23\u0e41\u0e25\u0e49\u0e27"
+          }
+        },
+        "user_a4e57aad-40f0-4bd8-a78e-f5f1b8cc2927": {
+          "spec": {
+            "form": {
+              "name": "form_8cec776d-10a4-4a73-9a4c-95b542c66fa7",
+              "fields": [
+                {
+                  "kind": "any",
+                  "name": "field_be9bff21-9f0a-4b96-bffb-f67be73315e6",
+                  "uiSchema": {
+                    "ui:title": "\u0e23\u0e32\u0e22\u0e01\u0e32\u0e23\u0e04\u0e33\u0e02\u0e2d\u0e25\u0e32\u0e17\u0e35\u0e48\u0e22\u0e31\u0e07\u0e44\u0e21\u0e48\u0e2d\u0e19\u0e38\u0e21\u0e31\u0e15\u0e34",
+                    "ui:widget": "ComboboxWidget",
+                    "ui:placeholder": "Select an option"
+                  },
+                  "direction": "input",
+                  "input_map": {
+                    "spec": {
+                      "maps": [
+                        {
+                          "metadata": {
+                            "assignmentType": "variable"
+                          },
+                          "has-no-value": false,
+                          "target_variable": "self.input.default",
+                          "value_expression": "flow[\"extract value from user imput\"].output.leave_request_object.leave_request"
+                        },
+                        {
+                          "metadata": {
+                            "assignmentType": "pyExpression"
+                          },
+                          "has-no-value": false,
+                          "target_variable": "self.input.choices",
+                          "value_expression": "[\"John Smith (EMP001) Annual Leave 3 days 2025-10-20 to 2025-10-22\",\n\"Jane Johnson (EMP002) Sick Leave 1 day 2025-10-15 to 2025-10-15\",\n\"John Smith (EMP001) Personal Leave 5 days 2025-11-01 to 2025-11-05\",\n\"Sarah Davis (EMP004) Annual Leave 3 days 2025-10-25 to 2025-10-27\",\n\"Mike Brown (EMP003) Annual Leave 3 days 2025-11-10 to 2025-11-12\"]\n"
+                        },
+                        {
+                          "metadata": {
+                            "assignmentType": "blank"
+                          },
+                          "has-no-value": true,
+                          "target_variable": "self.input.display_text"
+                        },
+                        {
+                          "metadata": {
+                            "assignmentType": "variable"
+                          },
+                          "has-no-value": false,
+                          "target_variable": "self.input.display_items",
+                          "value_expression": "[]"
+                        }
+                      ],
+                      "name": ""
+                    }
+                  },
+                  "display_name": "\u0e23\u0e32\u0e22\u0e01\u0e32\u0e23\u0e04\u0e33\u0e02\u0e2d\u0e25\u0e32\u0e17\u0e35\u0e48\u0e22\u0e31\u0e07\u0e44\u0e21\u0e48\u0e2d\u0e19\u0e38\u0e21\u0e31\u0e15\u0e34",
+                  "input_schema": {
+                    "type": "object",
+                    "required": [
+                      "choices"
+                    ],
+                    "properties": {
+                      "choices": {
+                        "type": "array",
+                        "items": {}
+                      },
+                      "default": {},
+                      "display_text": {
+                        "type": "string"
+                      },
+                      "display_items": {
+                        "type": "array",
+                        "items": {}
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "output_schema": {
+                    "type": "object",
+                    "required": [
+                      "value"
+                    ],
+                    "properties": {
+                      "value": {
+                        "type": "object",
+                        "properties": {}
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "uiSchemaParkingLot": {}
+                },
+                {
+                  "kind": "any",
+                  "name": "field_93def047-1abb-4159-8052-0ae23f78125f",
+                  "uiSchema": {
+                    "ui:title": "\u0e2a\u0e16\u0e32\u0e19\u0e30\u0e01\u0e32\u0e23\u0e2d\u0e19\u0e38\u0e21\u0e31\u0e15\u0e34",
+                    "ui:widget": "ComboboxWidget",
+                    "ui:placeholder": "Select an option"
+                  },
+                  "direction": "input",
+                  "input_map": {
+                    "spec": {
+                      "maps": [
+                        {
+                          "metadata": {
+                            "assignmentType": "pyExpression"
+                          },
+                          "has-no-value": false,
+                          "target_variable": "self.input.choices",
+                          "value_expression": "[\"approved\",\"denied\"]"
+                        },
+                        {
+                          "metadata": {
+                            "assignmentType": "blank"
+                          },
+                          "has-no-value": true,
+                          "target_variable": "self.input.display_text"
+                        },
+                        {
+                          "metadata": {
+                            "assignmentType": "variable"
+                          },
+                          "has-no-value": false,
+                          "target_variable": "self.input.display_items",
+                          "value_expression": "[]"
+                        },
+                        {
+                          "metadata": {
+                            "assignmentType": "variable"
+                          },
+                          "has-no-value": false,
+                          "target_variable": "self.input.default",
+                          "value_expression": "flow[\"extract value from user imput\"].output.leave_request_object.action"
+                        }
+                      ],
+                      "name": ""
+                    }
+                  },
+                  "display_name": "\u0e2a\u0e16\u0e32\u0e19\u0e30\u0e01\u0e32\u0e23\u0e2d\u0e19\u0e38\u0e21\u0e31\u0e15\u0e34",
+                  "input_schema": {
+                    "type": "object",
+                    "required": [
+                      "choices"
+                    ],
+                    "properties": {
+                      "choices": {
+                        "type": "array",
+                        "items": {}
+                      },
+                      "default": {},
+                      "display_text": {
+                        "type": "string"
+                      },
+                      "display_items": {
+                        "type": "array",
+                        "items": {}
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "output_schema": {
+                    "type": "object",
+                    "required": [
+                      "value"
+                    ],
+                    "properties": {
+                      "value": {
+                        "type": "object",
+                        "properties": {}
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "uiSchemaParkingLot": {}
+                },
+                {
+                  "kind": "text",
+                  "name": "field_060a19cf-0cd6-4a79-a8df-6a603845f32d",
+                  "uiSchema": {
+                    "ui:title": "\u0e04\u0e27\u0e32\u0e21\u0e04\u0e34\u0e14\u0e40\u0e2b\u0e47\u0e19",
+                    "ui:widget": "TextareaWidget"
+                  },
+                  "direction": "input",
+                  "input_map": {
+                    "spec": {
+                      "maps": [],
+                      "name": ""
+                    }
+                  },
+                  "display_name": "\u0e04\u0e27\u0e32\u0e21\u0e04\u0e34\u0e14\u0e40\u0e2b\u0e47\u0e19",
+                  "input_schema": {
+                    "type": "object",
+                    "required": [],
+                    "properties": {},
+                    "additionalProperties": false
+                  },
+                  "output_schema": {
+                    "type": "object",
+                    "required": [
+                      "value"
+                    ],
+                    "properties": {
+                      "value": {
+                        "type": "string"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "uiSchemaParkingLot": {}
+                }
+              ],
+              "buttons": [
+                {
+                  "kind": "submit",
+                  "name": "submit",
+                  "edge_id": "d19b9416-8563-4699-b154-a801ec5596f2",
+                  "visible": true,
+                  "display_name": "Submit"
+                },
+                {
+                  "kind": "cancel",
+                  "name": "cancel",
+                  "visible": false,
+                  "display_name": "Cancel"
+                }
+              ],
+              "jsonSchema": {
+                "type": "object",
+                "required": [
+                  "field_93def047-1abb-4159-8052-0ae23f78125f",
+                  "field_be9bff21-9f0a-4b96-bffb-f67be73315e6"
+                ],
+                "properties": {
+                  "field_060a19cf-0cd6-4a79-a8df-6a603845f32d": {
+                    "type": "string",
+                    "title": "\u0e04\u0e27\u0e32\u0e21\u0e04\u0e34\u0e14\u0e40\u0e2b\u0e47\u0e19"
+                  },
+                  "field_93def047-1abb-4159-8052-0ae23f78125f": {
+                    "title": "\u0e2a\u0e16\u0e32\u0e19\u0e30\u0e01\u0e32\u0e23\u0e2d\u0e19\u0e38\u0e21\u0e31\u0e15\u0e34 (Required)"
+                  },
+                  "field_be9bff21-9f0a-4b96-bffb-f67be73315e6": {
+                    "title": "\u0e23\u0e32\u0e22\u0e01\u0e32\u0e23\u0e04\u0e33\u0e02\u0e2d\u0e25\u0e32\u0e17\u0e35\u0e48\u0e22\u0e31\u0e07\u0e44\u0e21\u0e48\u0e2d\u0e19\u0e38\u0e21\u0e31\u0e15\u0e34 (Required)"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "display_name": "Form 1"
+            },
+            "kind": "user",
+            "name": "user_a4e57aad-40f0-4bd8-a78e-f5f1b8cc2927",
+            "fields": [],
+            "owners": [],
+            "position": {
+              "x": 56.49173144743929,
+              "y": 106.99298358394822
+            },
+            "display_name": "\u0e41\u0e1a\u0e1a\u0e1f\u0e2d\u0e23\u0e4c\u0e21\u0e2d\u0e19\u0e38\u0e21\u0e31\u0e15\u0e34\u0e04\u0e33\u0e02\u0e2d\u0e25\u0e32"
+          }
+        },
+        "user_b0ab7aea-5358-4891-811f-b9002af49796": {
+          "spec": {
+            "kind": "user",
+            "name": "user_b0ab7aea-5358-4891-811f-b9002af49796",
+            "fields": [
+              {
+                "kind": "text",
+                "name": "text_output_1d3815ef-6b52-4a02-a20e-dd08c2272cb6",
+                "text": "|\u0e23\u0e32\u0e22\u0e01\u0e32\u0e23\u0e04\u0e33\u0e02\u0e2d\u0e25\u0e32 | \u0e2a\u0e16\u0e32\u0e19\u0e30 | \u0e04\u0e27\u0e32\u0e21\u0e40\u0e2b\u0e47\u0e19                            \n|-------------|-------|------------                            \n|{flow[\"User activity 1\"][\"\u0e41\u0e1a\u0e1a\u0e1f\u0e2d\u0e23\u0e4c\u0e21\u0e2d\u0e19\u0e38\u0e21\u0e31\u0e15\u0e34\u0e04\u0e33\u0e02\u0e2d\u0e25\u0e32\"].output[\"\u0e23\u0e32\u0e22\u0e01\u0e32\u0e23\u0e04\u0e33\u0e02\u0e2d\u0e25\u0e32\u0e17\u0e35\u0e48\u0e22\u0e31\u0e07\u0e44\u0e21\u0e48\u0e2d\u0e19\u0e38\u0e21\u0e31\u0e15\u0e34\"]} |{flow[\"User activity 1\"][\"\u0e41\u0e1a\u0e1a\u0e1f\u0e2d\u0e23\u0e4c\u0e21\u0e2d\u0e19\u0e38\u0e21\u0e31\u0e15\u0e34\u0e04\u0e33\u0e02\u0e2d\u0e25\u0e32\"].output[\"\u0e2a\u0e16\u0e32\u0e19\u0e30\u0e01\u0e32\u0e23\u0e2d\u0e19\u0e38\u0e21\u0e31\u0e15\u0e34\"]}| {flow[\"User activity 1\"][\"\u0e41\u0e1a\u0e1a\u0e1f\u0e2d\u0e23\u0e4c\u0e21\u0e2d\u0e19\u0e38\u0e21\u0e31\u0e15\u0e34\u0e04\u0e33\u0e02\u0e2d\u0e25\u0e32\"].output[\"\u0e04\u0e27\u0e32\u0e21\u0e04\u0e34\u0e14\u0e40\u0e2b\u0e47\u0e19\"]}",
+                "direction": "output",
+                "input_schema": {
+                  "type": "object",
+                  "required": [
+                    "value"
+                  ],
+                  "properties": {
+                    "value": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            ],
+            "owners": [],
+            "position": {
+              "x": 54.441212503086376,
+              "y": 392.91231521100235
+            },
+            "display_name": "table summary"
+          }
+        }
+      },
+      "schemas": {}
+    },
+    "UserActivity 2": {
+      "spec": {
+        "kind": "user_flow",
+        "name": "UserActivity 2",
+        "position": {
+          "x": 73.51031930992986,
+          "y": 363.98899569057437
+        },
+        "dimensions": {
+          "width": 286,
+          "height": 340
+        },
+        "initiators": [],
+        "display_name": "User activity 2"
+      },
+      "edges": [
+        {
+          "id": "3d3e00d6-1e75-42f3-ac26-460b476df93d",
+          "end": "user_5422562d-018f-4f0e-8f7d-99e5a6211e42",
+          "start": "UserActivity 2__start__"
+        },
+        {
+          "id": "87934ecc-df57-47c5-ac8f-98f82b4a89d5",
+          "end": "UserActivity 2__end__",
+          "start": "user_5422562d-018f-4f0e-8f7d-99e5a6211e42"
+        }
+      ],
+      "nodes": {
+        "UserActivity 2__end__": {
+          "spec": {
+            "kind": "end",
+            "name": "UserActivity 2__end__",
+            "position": {
+              "x": 20,
+              "y": 274
+            }
+          }
+        },
+        "UserActivity 2__start__": {
+          "spec": {
+            "kind": "start",
+            "name": "UserActivity 2__start__",
+            "position": {
+              "x": 20,
+              "y": 0
+            }
+          }
+        },
+        "user_5422562d-018f-4f0e-8f7d-99e5a6211e42": {
+          "spec": {
+            "kind": "user",
+            "name": "user_5422562d-018f-4f0e-8f7d-99e5a6211e42",
+            "fields": [
+              {
+                "kind": "text",
+                "name": "text_output_e4714eda-052d-427c-bcd6-96a9bbf53cf0",
+                "text": "\u0e15\u0e33\u0e41\u0e2b\u0e19\u0e48\u0e07\u0e02\u0e2d\u0e07\u0e04\u0e38\u0e13\u0e44\u0e21\u0e48\u0e2a\u0e32\u0e21\u0e32\u0e23\u0e16\u0e17\u0e33\u0e04\u0e33\u0e02\u0e2d\u0e17\u0e35\u0e48\u0e04\u0e38\u0e13\u0e15\u0e49\u0e2d\u0e07\u0e01\u0e32\u0e23\u0e44\u0e14\u0e49",
+                "direction": "output",
+                "input_schema": {
+                  "type": "object",
+                  "required": [
+                    "value"
+                  ],
+                  "properties": {
+                    "value": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            ],
+            "owners": [],
+            "position": {
+              "x": 20,
+              "y": 108
+            },
+            "display_name": "denied access"
+          }
+        }
+      },
+      "schemas": {}
+    },
+    "prompt_c4da23c4-b5c8-4285-9d43-1d01a3c3f3ae": {
+      "spec": {
+        "llm": "watsonx/meta-llama/llama-3-2-90b-vision-instruct",
+        "kind": "prompt",
+        "name": "prompt_c4da23c4-b5c8-4285-9d43-1d01a3c3f3ae",
+        "metadata": {
+          "creativity_slider_position": "5",
+          "creativity_slider_manual_override": false
+        },
+        "position": {
+          "x": -384.0828214003943,
+          "y": 271.3780940381265
+        },
+        "test_data": [
+          {
+            "value": "\u0e15\u0e49\u0e2d\u0e07\u0e01\u0e32\u0e23\u0e2d\u0e19\u0e38\u0e21\u0e31\u0e15\u0e34\u0e04\u0e33\u0e02\u0e2d\u0e25\u0e32\u0e02\u0e2d\u0e07 Jane",
+            "source": "self.input.user_input"
+          }
+        ],
+        "description": "",
+        "user_prompt": "{self.input.user_input}",
+        "display_name": "extract value from user imput",
+        "input_schema": {
+          "type": "object",
+          "required": [
+            "user_input"
+          ],
+          "properties": {
+            "user_input": {
+              "type": "string",
+              "description": ""
+            }
+          }
+        },
+        "output_schema": {
+          "type": "object",
+          "properties": {
+            "leave_request_object": {
+              "type": "object",
+              "properties": {
+                "action": {
+                  "type": "string"
+                },
+                "leave_request": {
+                  "type": "string"
+                }
+              },
+              "description": "leave_request that the manager wants to approve or denied"
+            }
+          }
+        },
+        "system_prompt": "you will recieve user query that wants to approve leave request. Extract the following variables\n- leave_request: leave request the manager wants to approve. Choose one of the leave request that are cloest to the query from the following list:\n[\"John Smith (EMP001) Annual Leave 3 days 2025-10-20 to 2025-10-22\",\n\"Jane Johnson (EMP002) Sick Leave 1 day 2025-10-15 to 2025-10-15\",\n\"John Smith (EMP001) Personal Leave 5 days 2025-11-01 to 2025-11-05\",\n\"Sarah Davis (EMP004) Annual Leave 3 days 2025-10-25 to 2025-10-27\",\n\"Mike Brown (EMP003) Annual Leave 3 days 2025-11-10 to 2025-11-12\"]\nIf none is close or not enough information, leave blank \"\"\nIf more than 1 match, choose 1\n\n- \"action\": either the manager wnats to \"approved\" the reqiest or \"denied\" the request. choose from these 2 values\nIf manager doesnot specify, leave blank: \"\"\n",
+        "llm_parameters": {
+          "top_k": 30,
+          "top_p": 0.7,
+          "temperature": 0.4,
+          "max_new_tokens": 200,
+          "min_new_tokens": 50,
+          "stop_sequences": [
+            "Human",
+            "AI"
+          ]
+        },
+        "prompt_examples": [
+          {
+            "input": "\u0e2d\u0e22\u0e32\u0e01\u0e1b\u0e0f\u0e34\u0e40\u0e2a\u0e17\u0e04\u0e33\u0e02\u0e2d\u0e25\u0e32\u0e02\u0e2d\u0e07\u0e2b\u0e25\u0e32\u0e22\u0e04\u0e19",
+            "enabled": true,
+            "expected_output": "{\n  \"action\": \"denied\",\n  \"leave_request\": \"\"\n  \n}"
+          },
+          {
+            "input": "\u0e2d\u0e19\u0e38\u0e21\u0e31\u0e15\u0e34\u0e04\u0e33\u0e02\u0e2d\u0e25\u0e32\u0e27\u0e31\u0e19\u0e17\u0e35\u0e48 1 \u0e1e\u0e24\u0e29\u0e08\u0e34\u0e01\u0e32\u0e22\u0e19",
+            "enabled": true,
+            "expected_output": "{\n  \"action\": \"approved\",\n  \"leave_request\": \"John Smith (EMP001) Personal Leave 5 days 2025-11-01 to 2025-11-05\"\n}"
+          },
+          {
+            "input": "\u0e15\u0e49\u0e2d\u0e07\u0e01\u0e32\u0e23\u0e2d\u0e19\u0e38\u0e21\u0e31\u0e15\u0e34\u0e04\u0e33\u0e02\u0e2d\u0e25\u0e32\u0e02\u0e2d\u0e07 Jane",
+            "enabled": true,
+            "expected_output": "{\n  \"action\": \"approved\",\n  \"leave_request\": \"Jane Johnson (EMP002) Sick Leave 1 day 2025-10-15 to 2025-10-15\"\n}"
+          }
+        ],
+        "error_handler_config": {
+          "max_retries": 0,
+          "error_message": "Something went wrong while running 'extract value from user imput'",
+          "retry_interval": 1000
+        }
+      },
+      "input_map": {
+        "spec": {
+          "maps": [
+            {
+              "metadata": {
+                "assignmentType": "variable"
+              },
+              "has-no-value": false,
+              "target_variable": "self.input.user_input",
+              "value_expression": "flow.input.user_input"
+            }
+          ],
+          "name": ""
+        }
+      }
+    }
+  },
+  "schemas": {},
+  "metadata": {
+    "source_kind": "ui"
+  },
+  "output_map": {
+    "spec": {
+      "maps": [
+        {
+          "metadata": {
+            "assignmentType": "variable"
+          },
+          "has-no-value": false,
+          "target_variable": "self.output.leave_request_submitted",
+          "value_expression": "flow[\"User activity 1\"].approve_leave_request.output"
+        }
+      ],
+      "name": ""
+    }
+  }
+}

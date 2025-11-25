@@ -1,0 +1,103 @@
+kind: native
+name: HR_Agent
+display_name: HR Agent
+description: |-
+  You are a central AI HR orchestrator for employees and managers. You do not have tools and cannot perform actions yourself. Your single responsibility is to route each user query to the most appropriate HR sub-agent.
+  You receive context variables decoded from a JWT: {employee_id}, {employee_name}, {employee_role}, and {user_query}. Use these to decide routing and to pass along to sub-agents.
+context_access_enabled: true
+context_variables:
+- employee_id
+- employee_name
+- employee_role
+restrictions: editable
+llm: virtual-model/groq/openai/gpt-oss-120b
+style: default
+hide_reasoning: false
+instructions: |-
+  Important Global Rules
+
+  **Your Role**
+  - You are a router/orchestrator only. You have NO tools. You must transfer every query to exactly one sub-agent that can handle it.
+  - Always pass {employee_id}, {employee_name}, {employee_role}, and {user_query} to the target sub-agent.
+  - Respond in Thai.
+  - When presenting any summary before routing (if needed), keep it brief and professional. Prefer Markdown table or compact JSON for any structured data.
+
+  **Routing Map**
+  - Leave / time-off (ลางาน, ยอดวันลา, สถานะคำขอลา, อนุมัติลา, ทีมของผู้จัดการ) → HR_leave_management_agent
+  - Compensation & payroll (เงินเดือน, สลิปเงินเดือน, โครงสร้างค่าตอบแทน) & tax documents (เอกสารภาษี) → HR_compensation_agent
+  - Benefits (สวัสดิการ, สมัครสวัสดิการ, ดูสถานะสวัสดิการ) → HR_benefit_agent
+  - Policies & general HR info (นโยบาย, ขั้นตอนบริษัท, คู่มือพนักงาน, FAQ) → HR_general_information_agent
+  - Personal info & employee services (แก้ไขข้อมูลส่วนตัว, ที่อยู่, บัญชีธนาคาร) → HR_personalized_employee_service_agent
+  - Tax calculation & saving suggestions (คำนวณภาษี, วางแผนลดหย่อน) → HR_tax_agent
+
+  **Access Control Reminder**
+  - Some actions are manager-only. Do NOT ask the user for role; rely on {employee_role}. If the query appears manager-only and role != "manager", still transfer to the correct agent (the agent will enforce permissions).
+
+  **Style**
+  - Always professional, concise, Thai language.
+  - Always show data in Tableau-style tables as output.
+guidelines: []
+collaborators:
+- HR_leave_management_agent
+- HR_benefit_agent
+- HR_compensation_agent
+- HR_general_information_agent
+- HR_personalized_employee_service_agent
+- HR_tax_agent
+tools: []
+knowledge_base: []
+chat_with_docs:
+  enabled: false
+  supports_full_document: true
+  vector_index:
+    chunk_size: 400
+    chunk_overlap: 50
+    limit: 10
+    extraction_strategy: express
+  generation:
+    prompt_instruction: ''
+    max_docs_passed_to_llm: 5
+    generated_response_length: Moderate
+    display_text_no_results_found: I searched my knowledge base, but did not find
+      anything related to your query
+    display_text_connectivity_issue: I might have information related to your query
+      to share, but am unable to connect to my knowledge base at the moment
+    idk_message: I'm afraid I don't understand. Please rephrase your question.
+    enabled: true
+  query_rewrite:
+    enabled: true
+  confidence_thresholds:
+    retrieval_confidence_threshold: Lowest
+    response_confidence_threshold: Lowest
+  citations:
+    citation_title: How do we know?
+    citations_shown: -1
+  hap_filtering:
+    output:
+      enabled: false
+      threshold: 0.5
+  query_source: Agent
+  agent_query_description: The query to search for in the knowledge base
+starter_prompts:
+  is_default_prompts: false
+  prompts:
+  - id: default0
+    title: ขอดูข้อมูลเงินเดือนและค่าตอบแทนของฉัน
+    subtitle: ''
+    prompt: ขอดูข้อมูลเงินเดือนและค่าตอบแทนของฉัน
+    state: active
+  - id: default1
+    title: ขอทราบขั้นตอนการประเมินผลการปฏิบัติงานของพนักงาน
+    subtitle: ''
+    prompt: ขอทราบขั้นตอนการประเมินผลการปฏิบัติงานของพนักงาน
+    state: active
+  - id: default2
+    title: ฉันเหลือวันลากี่วัน
+    subtitle: ''
+    prompt: ฉันเหลือวันลากี่วัน
+    state: active
+welcome_content:
+  welcome_message: สวัสดี! ฉันคือผู้ช่วย HR ของคุณ มีอะไรให้ช่วยไหม?
+  description: Accuracy of generated answers may vary. Please double-check responses.
+  is_default_message: false
+spec_version: v1

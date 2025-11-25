@@ -1,0 +1,1528 @@
+{
+  "spec": {
+    "kind": "flow",
+    "name": "manager_only__update_personal_info_flow",
+    "initiators": [],
+    "description": "This tool allows a user to update personal information using a form-based flow builder. It will collect user inputs for each field and then call the `update_personal_info` tool to execute the changes, providing a better user experience.\n\nUsage Constraint:\n- This tool is restricted for use by users with the 'manager' role only.",
+    "display_name": "manager_only__update_personal_info_flow",
+    "input_schema": {},
+    "output_schema": {}
+  },
+  "edges": [
+    {
+      "id": "941be267-67fb-484b-a654-8f83addfa0f6",
+      "end": "Branch 2",
+      "start": "__start__"
+    },
+    {
+      "id": "9b41f25f-c88b-4fe0-9c1a-8973789a8c9e",
+      "end": "Branch 1",
+      "start": "UserActivity 1"
+    },
+    {
+      "id": "eb72795d-eb44-44df-b5b9-a7d068b519fd",
+      "end": "UserActivity 1",
+      "start": "prompt_68ffb5ff-7854-4fcf-af66-899051af675c"
+    },
+    {
+      "id": "ee6dcb31-4062-4abd-bc69-46645d2835bd",
+      "end": "UserActivity 2",
+      "start": "Branch 1",
+      "display_name": "Yes"
+    },
+    {
+      "id": "ce0897a1-c0b9-44f1-9a0b-5f4a752420d3",
+      "end": "UserActivity 3",
+      "start": "Branch 1",
+      "display_name": "No"
+    },
+    {
+      "id": "a7e0c8f7-b96e-4e4b-8bfb-e583d2858835",
+      "end": "__end__",
+      "start": "UserActivity 3"
+    },
+    {
+      "id": "32afa26d-0192-4aa1-a5de-bd17ab87ee1b",
+      "end": "__end__",
+      "start": "UserActivity 2"
+    },
+    {
+      "id": "7a9c42d1-3309-41dc-a2d7-5674d78d8929",
+      "end": "prompt_68ffb5ff-7854-4fcf-af66-899051af675c",
+      "start": "Branch 2",
+      "display_name": "Path 1"
+    },
+    {
+      "id": "5dd6c21a-1801-467f-a2bf-d197cd4f0b58",
+      "end": "UserActivity 4",
+      "start": "Branch 2",
+      "display_name": "Path 2"
+    },
+    {
+      "id": "1186fdfa-cc9a-4779-9677-16ff4a768cba",
+      "end": "__end__",
+      "start": "UserActivity 4"
+    }
+  ],
+  "nodes": {
+    "__end__": {
+      "spec": {
+        "kind": "end",
+        "name": "__end__",
+        "position": {
+          "x": 0,
+          "y": 3162
+        }
+      }
+    },
+    "Branch 1": {
+      "spec": {
+        "kind": "branch",
+        "name": "Branch 1",
+        "position": {
+          "x": -300,
+          "y": 1914
+        },
+        "evaluator": {
+          "conditions": [
+            {
+              "default": false,
+              "edge_id": "ee6dcb31-4062-4abd-bc69-46645d2835bd",
+              "metadata": {
+                "id": "0459ffd3-690e-4da6-bc84-8231cf470515",
+                "conditions": [
+                  {
+                    "value": "True",
+                    "isValid": true,
+                    "dataType": "boolean",
+                    "operator": "is",
+                    "variableName": "flow[\"manager__update-info-flow\"][\"\u0e04\u0e38\u0e13\u0e22\u0e37\u0e19\u0e22\u0e31\u0e19\u0e17\u0e35\u0e48\u0e08\u0e30\u0e2d\u0e31\u0e1e\u0e40\u0e14\u0e15\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e2b\u0e23\u0e37\u0e2d\u0e44\u0e21\u0e48 (\u0e01\u0e23\u0e38\u0e13\u0e32\u0e15\u0e23\u0e27\u0e08\u0e2a\u0e2d\u0e1a\u0e04\u0e27\u0e32\u0e21\u0e16\u0e39\u0e01\u0e15\u0e49\u0e2d\u0e07)\"].output.value"
+                  }
+                ]
+              },
+              "expression": "flow[\"manager__update-info-flow\"][\"\u0e04\u0e38\u0e13\u0e22\u0e37\u0e19\u0e22\u0e31\u0e19\u0e17\u0e35\u0e48\u0e08\u0e30\u0e2d\u0e31\u0e1e\u0e40\u0e14\u0e15\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e2b\u0e23\u0e37\u0e2d\u0e44\u0e21\u0e48 (\u0e01\u0e23\u0e38\u0e13\u0e32\u0e15\u0e23\u0e27\u0e08\u0e2a\u0e2d\u0e1a\u0e04\u0e27\u0e32\u0e21\u0e16\u0e39\u0e01\u0e15\u0e49\u0e2d\u0e07)\"].output.value is True"
+            },
+            {
+              "default": true,
+              "edge_id": "ce0897a1-c0b9-44f1-9a0b-5f4a752420d3",
+              "metadata": {
+                "id": "4eeda620-d50c-485d-a381-b1d5543b814b"
+              }
+            }
+          ]
+        },
+        "display_name": "confirm to update employee's personal info",
+        "match_policy": "FIRST_MATCH"
+      }
+    },
+    "Branch 2": {
+      "spec": {
+        "kind": "branch",
+        "name": "Branch 2",
+        "position": {
+          "x": 0,
+          "y": 170
+        },
+        "evaluator": {
+          "conditions": [
+            {
+              "default": false,
+              "edge_id": "7a9c42d1-3309-41dc-a2d7-5674d78d8929",
+              "metadata": {
+                "id": "d7a672da-f2d1-4430-ada5-8239edc54a2b",
+                "conditions": [
+                  {
+                    "value": "manager",
+                    "isValid": true,
+                    "dataType": "string",
+                    "operator": "==",
+                    "variableName": "flow.input.employee_role"
+                  }
+                ]
+              },
+              "expression": "flow.input.employee_role == \"manager\""
+            },
+            {
+              "default": true,
+              "edge_id": "5dd6c21a-1801-467f-a2bf-d197cd4f0b58",
+              "metadata": {
+                "id": "8428d8e0-00f6-4875-83f0-a34aad84422c"
+              }
+            }
+          ]
+        },
+        "display_name": "authorize user",
+        "match_policy": "FIRST_MATCH"
+      }
+    },
+    "__start__": {
+      "spec": {
+        "kind": "start",
+        "name": "__start__",
+        "position": {
+          "x": 0,
+          "y": 0
+        }
+      }
+    },
+    "UserActivity 1": {
+      "spec": {
+        "kind": "user_flow",
+        "name": "UserActivity 1",
+        "position": {
+          "x": -316,
+          "y": 864
+        },
+        "dimensions": {
+          "width": 286,
+          "height": 928
+        },
+        "initiators": [],
+        "display_name": "manager__update-info-flow"
+      },
+      "edges": [
+        {
+          "id": "a0fb1961-7f8f-4648-81e1-8289f732cd31",
+          "end": "prompt_e8e796c3-2042-42c4-9dd4-098697b3a1ee",
+          "start": "UserActivity 1__start__"
+        },
+        {
+          "id": "9a80b550-d0ee-48af-9f15-3a613642847c",
+          "end": "CodeBlock 1",
+          "start": "user_ca2ac15f-86b4-475b-bb48-2b4ac69d17f1"
+        },
+        {
+          "id": "5f78f20c-aeca-42bb-ae31-4a13d90bf314",
+          "end": "user_a38936ad-6729-4d23-b229-5d746765ec38",
+          "start": "CodeBlock 1"
+        },
+        {
+          "id": "d92ad9f8-9986-489c-8f9b-4ca7fadf2521",
+          "end": "user_c8c1c118-9d31-46d1-9a37-d8104d4ff89a",
+          "start": "user_a38936ad-6729-4d23-b229-5d746765ec38"
+        },
+        {
+          "id": "e598bb9c-c59d-4a25-b8cd-7be797dd3849",
+          "end": "UserActivity 1__end__",
+          "start": "user_c8c1c118-9d31-46d1-9a37-d8104d4ff89a"
+        },
+        {
+          "id": "fbede42c-565a-4c17-bf0b-298b9501fd47",
+          "end": "user_ca2ac15f-86b4-475b-bb48-2b4ac69d17f1",
+          "start": "prompt_e8e796c3-2042-42c4-9dd4-098697b3a1ee"
+        }
+      ],
+      "nodes": {
+        "CodeBlock 1": {
+          "spec": {
+            "fn": "form_output = flow[\"manager__update-info-flow\"][\"\u0e41\u0e1a\u0e1a\u0e1f\u0e2d\u0e23\u0e4c\u0e21\u0e2d\u0e31\u0e1e\u0e40\u0e14\u0e15\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e1e\u0e19\u0e31\u0e01\u0e07\u0e32\u0e19\"].output\n\nemployee_id_str = form_output.get(\"Employee ID\")\nfirstname_str = form_output.get(\"First Name\")\nlastname_str = form_output.get(\"Last Name\")\nphone_str = form_output.get(\"Phone Number\")\nemail_str = form_output.get(\"Work Email\")\ndepartment_str = form_output.get(\"Department\")\njob_title_str = form_output.get(\"Job Title\")\nemployment_status_str = form_output.get(\"Employment Status\")\noffice_location_str = form_output.get(\"Office Location\")\n\nif not firstname_str:\n    firstname_str = \"-\"\nif not lastname_str:\n    lastname_str = \"-\"\nif not phone_str:\n    phone_str = \"-\"\nif not email_str:\n    email_str = \"-\"\nif not department_str:\n    department_str = \"-\"\nif not job_title_str:\n    job_title_str = \"-\"\nif not employment_status_str:\n    employment_status_str = \"-\"\nif not office_location_str:\n    office_location_str = \"-\"\n\nself.output.employee_id = employee_id_str\nself.output.transformed_firstname = firstname_str\nself.output.transformed_lastname = lastname_str\nself.output.transformed_phone_number = phone_str\nself.output.transformed_email = email_str\nself.output.transformed_department = department_str\nself.output.transformed_job_title = job_title_str\nself.output.transformed_employment_status = employment_status_str\nself.output.transformed_office_location = office_location_str",
+            "kind": "script",
+            "name": "CodeBlock 1",
+            "position": {
+              "x": 20,
+              "y": 424
+            },
+            "display_name": "Code block 1",
+            "output_schema": {
+              "type": "object",
+              "properties": {
+                "employee_id": {
+                  "type": "string",
+                  "description": ""
+                },
+                "transformed_email": {
+                  "type": "string",
+                  "description": ""
+                },
+                "transformed_lastname": {
+                  "type": "string",
+                  "description": ""
+                },
+                "transformed_firstname": {
+                  "type": "string",
+                  "description": ""
+                },
+                "transformed_job_title": {
+                  "type": "string",
+                  "description": ""
+                },
+                "transformed_department": {
+                  "type": "string",
+                  "description": ""
+                },
+                "transformed_phone_number": {
+                  "type": "string",
+                  "description": ""
+                },
+                "transformed_office_location": {
+                  "type": "string",
+                  "description": ""
+                },
+                "transformed_employment_status": {
+                  "type": "string",
+                  "description": ""
+                }
+              }
+            }
+          }
+        },
+        "UserActivity 1__end__": {
+          "spec": {
+            "kind": "end",
+            "name": "UserActivity 1__end__",
+            "position": {
+              "x": 20,
+              "y": 862
+            }
+          }
+        },
+        "UserActivity 1__start__": {
+          "spec": {
+            "kind": "start",
+            "name": "UserActivity 1__start__",
+            "position": {
+              "x": 20,
+              "y": 0
+            }
+          }
+        },
+        "user_a38936ad-6729-4d23-b229-5d746765ec38": {
+          "spec": {
+            "kind": "user",
+            "name": "user_a38936ad-6729-4d23-b229-5d746765ec38",
+            "fields": [
+              {
+                "kind": "text",
+                "name": "text_output_b54f9bb2-d1f5-4c82-a63e-569656a69a4d",
+                "text": "| Field |  Original Value | Update value |                  \n| :--- | :--- | :--- |                           \n| First Name |{flow[\"manager__update-info-flow\"][\"Generative prompt\"].output[\"original value\"].original_First_name} |{flow[\"manager__update-info-flow\"][\"Code block 1\"].output.transformed_firstname} |                  \n| Last Name | {flow[\"manager__update-info-flow\"][\"Generative prompt\"].output[\"original value\"].original_Last_name}|{flow[\"manager__update-info-flow\"][\"Code block 1\"].output.transformed_lastname} |                  \n| Work Email | {flow[\"manager__update-info-flow\"][\"Generative prompt\"].output[\"original value\"].original_Email}|{flow[\"manager__update-info-flow\"][\"Code block 1\"].output.transformed_email} |                  \n| Phone Number |{flow[\"manager__update-info-flow\"][\"Generative prompt\"].output[\"original value\"].original_Phone_number}| {flow[\"manager__update-info-flow\"][\"Code block 1\"].output.transformed_phone_number} |                \n| Department | {flow[\"manager__update-info-flow\"][\"Generative prompt\"].output[\"original value\"].original_Department}|{flow[\"manager__update-info-flow\"][\"Code block 1\"].output.transformed_department} |                  \n| Job Title |{flow[\"manager__update-info-flow\"][\"Generative prompt\"].output[\"original value\"].original_Job_title} |{flow[\"manager__update-info-flow\"][\"Code block 1\"].output.transformed_job_title} |                  \n| Employment Status | {flow[\"manager__update-info-flow\"][\"Generative prompt\"].output[\"original value\"].original_Employment_status}|{flow[\"manager__update-info-flow\"][\"Code block 1\"].output.transformed_employment_status} |                  \n| Office Location |{flow[\"manager__update-info-flow\"][\"Generative prompt\"].output[\"original value\"].original_Office_location}| {flow[\"manager__update-info-flow\"][\"Code block 1\"].output.transformed_office_location} |",
+                "direction": "output",
+                "input_schema": {
+                  "type": "object",
+                  "required": [
+                    "value"
+                  ],
+                  "properties": {
+                    "value": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            ],
+            "owners": [],
+            "position": {
+              "x": 20,
+              "y": 570
+            },
+            "display_name": "review changes"
+          }
+        },
+        "user_c8c1c118-9d31-46d1-9a37-d8104d4ff89a": {
+          "spec": {
+            "kind": "user",
+            "name": "user_c8c1c118-9d31-46d1-9a37-d8104d4ff89a",
+            "fields": [
+              {
+                "kind": "boolean",
+                "name": "boolean_31eb1698-9af5-47d4-8a27-9bc790612eea",
+                "direction": "input",
+                "output_schema": {
+                  "type": "object",
+                  "required": [
+                    "value"
+                  ],
+                  "properties": {
+                    "value": {
+                      "type": "boolean"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            ],
+            "owners": [],
+            "position": {
+              "x": 20,
+              "y": 716
+            },
+            "display_name": "\u0e04\u0e38\u0e13\u0e22\u0e37\u0e19\u0e22\u0e31\u0e19\u0e17\u0e35\u0e48\u0e08\u0e30\u0e2d\u0e31\u0e1e\u0e40\u0e14\u0e15\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e2b\u0e23\u0e37\u0e2d\u0e44\u0e21\u0e48 (\u0e01\u0e23\u0e38\u0e13\u0e32\u0e15\u0e23\u0e27\u0e08\u0e2a\u0e2d\u0e1a\u0e04\u0e27\u0e32\u0e21\u0e16\u0e39\u0e01\u0e15\u0e49\u0e2d\u0e07)"
+          }
+        },
+        "user_ca2ac15f-86b4-475b-bb48-2b4ac69d17f1": {
+          "spec": {
+            "form": {
+              "name": "form_9ff33fdc-58b1-4313-b6b5-26de7cdd7b26",
+              "fields": [
+                {
+                  "kind": "any",
+                  "name": "field_96c1d93a-5e79-47e9-ab32-48ffffc35b41",
+                  "uiSchema": {
+                    "ui:title": "Employee ID",
+                    "ui:widget": "ComboboxWidget",
+                    "ui:placeholder": "\u0e01\u0e23\u0e38\u0e13\u0e32\u0e40\u0e25\u0e37\u0e2d\u0e01\u0e23\u0e2b\u0e31\u0e2a\u0e1e\u0e19\u0e31\u0e01\u0e07\u0e32\u0e19\u0e17\u0e35\u0e48\u0e04\u0e38\u0e13\u0e15\u0e49\u0e2d\u0e07\u0e01\u0e32\u0e23\u0e2d\u0e31\u0e1e\u0e40\u0e14\u0e15\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25"
+                  },
+                  "direction": "input",
+                  "input_map": {
+                    "spec": {
+                      "maps": [
+                        {
+                          "metadata": {
+                            "assignmentType": "pyExpression"
+                          },
+                          "has-no-value": false,
+                          "target_variable": "self.input.choices",
+                          "value_expression": "[\"Sarah Johnson (EMP002)\", \"Michael Chen (EMP003)\", \"Lisa Park (EMP004)\", \"Robert Kim (EMP005)\"]"
+                        },
+                        {
+                          "metadata": {
+                            "assignmentType": "blank"
+                          },
+                          "has-no-value": true,
+                          "target_variable": "self.input.display_text"
+                        },
+                        {
+                          "metadata": {
+                            "assignmentType": "variable"
+                          },
+                          "has-no-value": false,
+                          "target_variable": "self.input.display_items",
+                          "value_expression": "[]"
+                        },
+                        {
+                          "metadata": {
+                            "assignmentType": "variable"
+                          },
+                          "has-no-value": false,
+                          "target_variable": "self.input.default",
+                          "value_expression": "flow[\"extract update field\"].output.update_dto.employee_to_update"
+                        }
+                      ],
+                      "name": ""
+                    }
+                  },
+                  "display_name": "Employee ID",
+                  "input_schema": {
+                    "type": "object",
+                    "required": [
+                      "choices"
+                    ],
+                    "properties": {
+                      "choices": {
+                        "type": "array",
+                        "items": {}
+                      },
+                      "default": {},
+                      "display_text": {
+                        "type": "string"
+                      },
+                      "display_items": {
+                        "type": "array",
+                        "items": {}
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "output_schema": {
+                    "type": "object",
+                    "required": [
+                      "value"
+                    ],
+                    "properties": {
+                      "value": {
+                        "type": "object",
+                        "properties": {}
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "uiSchemaParkingLot": {}
+                },
+                {
+                  "kind": "text",
+                  "name": "field_b9247820-f8a1-42f5-b9dd-cc5ef821a3ca",
+                  "uiSchema": {
+                    "ui:title": "First Name",
+                    "ui:widget": "TextWidget",
+                    "ui:placeholder": "\u0e04\u0e38\u0e13\u0e44\u0e21\u0e48\u0e44\u0e14\u0e49\u0e02\u0e2d\u0e2d\u0e31\u0e1e\u0e40\u0e14\u0e15\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e19\u0e35\u0e49 \u0e1b\u0e25\u0e48\u0e2d\u0e22\u0e27\u0e48\u0e32\u0e07\u0e2b\u0e32\u0e01\u0e44\u0e21\u0e48\u0e15\u0e49\u0e2d\u0e07\u0e01\u0e32\u0e23\u0e2d\u0e31\u0e1e\u0e40\u0e14\u0e15"
+                  },
+                  "direction": "input",
+                  "input_map": {
+                    "spec": {
+                      "maps": [
+                        {
+                          "metadata": {
+                            "assignmentType": "variable"
+                          },
+                          "has-no-value": false,
+                          "target_variable": "self.input.default",
+                          "value_expression": "flow[\"extract update field\"].output.update_dto.new_firstname"
+                        }
+                      ],
+                      "name": ""
+                    }
+                  },
+                  "display_name": "First Name",
+                  "input_schema": {
+                    "type": "object",
+                    "required": [],
+                    "properties": {
+                      "default": {
+                        "type": "string"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "output_schema": {
+                    "type": "object",
+                    "required": [
+                      "value"
+                    ],
+                    "properties": {
+                      "value": {
+                        "type": "string"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "uiSchemaParkingLot": {}
+                },
+                {
+                  "kind": "text",
+                  "name": "field_1625aa24-62d2-4417-a228-fd7bed25ac5f",
+                  "uiSchema": {
+                    "ui:title": "Last Name",
+                    "ui:widget": "TextWidget",
+                    "ui:placeholder": "\u0e04\u0e38\u0e13\u0e44\u0e21\u0e48\u0e44\u0e14\u0e49\u0e02\u0e2d\u0e2d\u0e31\u0e1e\u0e40\u0e14\u0e15\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e19\u0e35\u0e49 \u0e1b\u0e25\u0e48\u0e2d\u0e22\u0e27\u0e48\u0e32\u0e07\u0e2b\u0e32\u0e01\u0e44\u0e21\u0e48\u0e15\u0e49\u0e2d\u0e07\u0e01\u0e32\u0e23\u0e2d\u0e31\u0e1e\u0e40\u0e14\u0e15"
+                  },
+                  "direction": "input",
+                  "input_map": {
+                    "spec": {
+                      "maps": [
+                        {
+                          "metadata": {
+                            "assignmentType": "variable"
+                          },
+                          "has-no-value": false,
+                          "target_variable": "self.input.default",
+                          "value_expression": "flow[\"extract update field\"].output.update_dto.new_lastname"
+                        }
+                      ],
+                      "name": ""
+                    }
+                  },
+                  "display_name": "Last Name",
+                  "input_schema": {
+                    "type": "object",
+                    "required": [],
+                    "properties": {
+                      "default": {
+                        "type": "string"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "output_schema": {
+                    "type": "object",
+                    "required": [
+                      "value"
+                    ],
+                    "properties": {
+                      "value": {
+                        "type": "string"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "uiSchemaParkingLot": {}
+                },
+                {
+                  "kind": "text",
+                  "name": "field_e75d15d1-d255-4cc2-9c59-07d60f3d68cd",
+                  "uiSchema": {
+                    "ui:title": "Work Email",
+                    "ui:widget": "TextWidget",
+                    "ui:placeholder": "\u0e04\u0e38\u0e13\u0e44\u0e21\u0e48\u0e44\u0e14\u0e49\u0e02\u0e2d\u0e2d\u0e31\u0e1e\u0e40\u0e14\u0e15\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e19\u0e35\u0e49 \u0e1b\u0e25\u0e48\u0e2d\u0e22\u0e27\u0e48\u0e32\u0e07\u0e2b\u0e32\u0e01\u0e44\u0e21\u0e48\u0e15\u0e49\u0e2d\u0e07\u0e01\u0e32\u0e23\u0e2d\u0e31\u0e1e\u0e40\u0e14\u0e15"
+                  },
+                  "direction": "input",
+                  "input_map": {
+                    "spec": {
+                      "maps": [
+                        {
+                          "metadata": {
+                            "assignmentType": "variable"
+                          },
+                          "has-no-value": false,
+                          "target_variable": "self.input.default",
+                          "value_expression": "flow[\"extract update field\"].output.update_dto.new_email"
+                        }
+                      ],
+                      "name": ""
+                    }
+                  },
+                  "display_name": "Work Email",
+                  "input_schema": {
+                    "type": "object",
+                    "required": [],
+                    "properties": {
+                      "default": {
+                        "type": "string"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "output_schema": {
+                    "type": "object",
+                    "required": [
+                      "value"
+                    ],
+                    "properties": {
+                      "value": {
+                        "type": "string"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "uiSchemaParkingLot": {}
+                },
+                {
+                  "kind": "text",
+                  "name": "field_08cee1c9-8a4f-42fb-a7a7-ab67336be78a",
+                  "uiSchema": {
+                    "ui:title": "Phone Number",
+                    "ui:widget": "TextWidget",
+                    "ui:placeholder": "\u0e04\u0e38\u0e13\u0e44\u0e21\u0e48\u0e44\u0e14\u0e49\u0e02\u0e2d\u0e2d\u0e31\u0e1e\u0e40\u0e14\u0e15\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e19\u0e35\u0e49 \u0e1b\u0e25\u0e48\u0e2d\u0e22\u0e27\u0e48\u0e32\u0e07\u0e2b\u0e32\u0e01\u0e44\u0e21\u0e48\u0e15\u0e49\u0e2d\u0e07\u0e01\u0e32\u0e23\u0e2d\u0e31\u0e1e\u0e40\u0e14\u0e15"
+                  },
+                  "direction": "input",
+                  "input_map": {
+                    "spec": {
+                      "maps": [
+                        {
+                          "metadata": {
+                            "assignmentType": "variable"
+                          },
+                          "has-no-value": false,
+                          "target_variable": "self.input.default",
+                          "value_expression": "flow[\"extract update field\"].output.update_dto.new_phone_number"
+                        }
+                      ],
+                      "name": ""
+                    }
+                  },
+                  "display_name": "Phone Number",
+                  "input_schema": {
+                    "type": "object",
+                    "required": [],
+                    "properties": {
+                      "default": {
+                        "type": "string"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "output_schema": {
+                    "type": "object",
+                    "required": [
+                      "value"
+                    ],
+                    "properties": {
+                      "value": {
+                        "type": "string"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "uiSchemaParkingLot": {}
+                },
+                {
+                  "kind": "text",
+                  "name": "field_0bc38cc1-b16d-4828-9c19-bb1d1f343445",
+                  "uiSchema": {
+                    "ui:title": "Department",
+                    "ui:widget": "TextWidget",
+                    "ui:placeholder": "\u0e04\u0e38\u0e13\u0e44\u0e21\u0e48\u0e44\u0e14\u0e49\u0e02\u0e2d\u0e2d\u0e31\u0e1e\u0e40\u0e14\u0e15\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e19\u0e35\u0e49 \u0e1b\u0e25\u0e48\u0e2d\u0e22\u0e27\u0e48\u0e32\u0e07\u0e2b\u0e32\u0e01\u0e44\u0e21\u0e48\u0e15\u0e49\u0e2d\u0e07\u0e01\u0e32\u0e23\u0e2d\u0e31\u0e1e\u0e40\u0e14\u0e15"
+                  },
+                  "direction": "input",
+                  "input_map": {
+                    "spec": {
+                      "maps": [
+                        {
+                          "metadata": {
+                            "assignmentType": "variable"
+                          },
+                          "has-no-value": false,
+                          "target_variable": "self.input.default",
+                          "value_expression": "flow[\"extract update field\"].output.update_dto.new_department"
+                        }
+                      ],
+                      "name": ""
+                    }
+                  },
+                  "display_name": "Department",
+                  "input_schema": {
+                    "type": "object",
+                    "required": [],
+                    "properties": {
+                      "default": {
+                        "type": "string"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "output_schema": {
+                    "type": "object",
+                    "required": [
+                      "value"
+                    ],
+                    "properties": {
+                      "value": {
+                        "type": "string"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "uiSchemaParkingLot": {}
+                },
+                {
+                  "kind": "text",
+                  "name": "field_8be8532c-297c-436a-9d0c-95d63256ff21",
+                  "uiSchema": {
+                    "ui:title": "Job Title",
+                    "ui:widget": "TextWidget",
+                    "ui:placeholder": "\u0e04\u0e38\u0e13\u0e44\u0e21\u0e48\u0e44\u0e14\u0e49\u0e02\u0e2d\u0e2d\u0e31\u0e1e\u0e40\u0e14\u0e15\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e19\u0e35\u0e49 \u0e1b\u0e25\u0e48\u0e2d\u0e22\u0e27\u0e48\u0e32\u0e07\u0e2b\u0e32\u0e01\u0e44\u0e21\u0e48\u0e15\u0e49\u0e2d\u0e07\u0e01\u0e32\u0e23\u0e2d\u0e31\u0e1e\u0e40\u0e14\u0e15"
+                  },
+                  "direction": "input",
+                  "input_map": {
+                    "spec": {
+                      "maps": [
+                        {
+                          "metadata": {
+                            "assignmentType": "variable"
+                          },
+                          "has-no-value": false,
+                          "target_variable": "self.input.default",
+                          "value_expression": "flow[\"extract update field\"].output.update_dto.new_job_title"
+                        }
+                      ],
+                      "name": ""
+                    }
+                  },
+                  "display_name": "Job Title",
+                  "input_schema": {
+                    "type": "object",
+                    "required": [],
+                    "properties": {
+                      "default": {
+                        "type": "string"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "output_schema": {
+                    "type": "object",
+                    "required": [
+                      "value"
+                    ],
+                    "properties": {
+                      "value": {
+                        "type": "string"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "uiSchemaParkingLot": {}
+                },
+                {
+                  "kind": "any",
+                  "name": "field_229b289b-e93a-4710-b7b2-116484330949",
+                  "uiSchema": {
+                    "ui:title": "Employment Status",
+                    "ui:widget": "ComboboxWidget",
+                    "ui:placeholder": "\u0e04\u0e38\u0e13\u0e44\u0e21\u0e48\u0e44\u0e14\u0e49\u0e02\u0e2d\u0e2d\u0e31\u0e1e\u0e40\u0e14\u0e15\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e19\u0e35\u0e49 \u0e1b\u0e25\u0e48\u0e2d\u0e22\u0e27\u0e48\u0e32\u0e07\u0e2b\u0e32\u0e01\u0e44\u0e21\u0e48\u0e15\u0e49\u0e2d\u0e07\u0e01\u0e32\u0e23\u0e2d\u0e31\u0e1e\u0e40\u0e14\u0e15"
+                  },
+                  "direction": "input",
+                  "input_map": {
+                    "spec": {
+                      "maps": [
+                        {
+                          "metadata": {
+                            "assignmentType": "pyExpression"
+                          },
+                          "has-no-value": false,
+                          "target_variable": "self.input.choices",
+                          "value_expression": "[\"Active\", \"Terminated\", \"Probation\", \"\"]"
+                        },
+                        {
+                          "metadata": {
+                            "assignmentType": "blank"
+                          },
+                          "has-no-value": true,
+                          "target_variable": "self.input.display_text"
+                        },
+                        {
+                          "metadata": {
+                            "assignmentType": "variable"
+                          },
+                          "has-no-value": false,
+                          "target_variable": "self.input.display_items",
+                          "value_expression": "[]"
+                        },
+                        {
+                          "metadata": {
+                            "assignmentType": "variable"
+                          },
+                          "has-no-value": false,
+                          "target_variable": "self.input.default",
+                          "value_expression": "flow[\"extract update field\"].output.update_dto.new_employment_status"
+                        }
+                      ],
+                      "name": ""
+                    }
+                  },
+                  "display_name": "Employment Status",
+                  "input_schema": {
+                    "type": "object",
+                    "required": [
+                      "choices"
+                    ],
+                    "properties": {
+                      "choices": {
+                        "type": "array",
+                        "items": {}
+                      },
+                      "default": {},
+                      "display_text": {
+                        "type": "string"
+                      },
+                      "display_items": {
+                        "type": "array",
+                        "items": {}
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "output_schema": {
+                    "type": "object",
+                    "required": [
+                      "value"
+                    ],
+                    "properties": {
+                      "value": {
+                        "type": "object",
+                        "properties": {}
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "uiSchemaParkingLot": {}
+                },
+                {
+                  "kind": "any",
+                  "name": "field_27ec96c6-67d1-405a-baba-b6f81ec6644c",
+                  "uiSchema": {
+                    "ui:title": "Office Location",
+                    "ui:widget": "ComboboxWidget",
+                    "ui:placeholder": "\u0e04\u0e38\u0e13\u0e44\u0e21\u0e48\u0e44\u0e14\u0e49\u0e02\u0e2d\u0e2d\u0e31\u0e1e\u0e40\u0e14\u0e15\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e19\u0e35\u0e49 \u0e1b\u0e25\u0e48\u0e2d\u0e22\u0e27\u0e48\u0e32\u0e07\u0e2b\u0e32\u0e01\u0e44\u0e21\u0e48\u0e15\u0e49\u0e2d\u0e07\u0e01\u0e32\u0e23\u0e2d\u0e31\u0e1e\u0e40\u0e14\u0e15"
+                  },
+                  "direction": "input",
+                  "input_map": {
+                    "spec": {
+                      "maps": [
+                        {
+                          "metadata": {
+                            "assignmentType": "pyExpression"
+                          },
+                          "has-no-value": false,
+                          "target_variable": "self.input.choices",
+                          "value_expression": "[\"Bangkok\", \"New York\", \"Singapore\", \"\"]"
+                        },
+                        {
+                          "metadata": {
+                            "assignmentType": "blank"
+                          },
+                          "has-no-value": true,
+                          "target_variable": "self.input.display_text"
+                        },
+                        {
+                          "metadata": {
+                            "assignmentType": "variable"
+                          },
+                          "has-no-value": false,
+                          "target_variable": "self.input.display_items",
+                          "value_expression": "[]"
+                        },
+                        {
+                          "metadata": {
+                            "assignmentType": "variable"
+                          },
+                          "has-no-value": false,
+                          "target_variable": "self.input.default",
+                          "value_expression": "flow[\"extract update field\"].output.update_dto.new_office_location"
+                        }
+                      ],
+                      "name": ""
+                    }
+                  },
+                  "display_name": "Office Location",
+                  "input_schema": {
+                    "type": "object",
+                    "required": [
+                      "choices"
+                    ],
+                    "properties": {
+                      "choices": {
+                        "type": "array",
+                        "items": {}
+                      },
+                      "default": {},
+                      "display_text": {
+                        "type": "string"
+                      },
+                      "display_items": {
+                        "type": "array",
+                        "items": {}
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "output_schema": {
+                    "type": "object",
+                    "required": [
+                      "value"
+                    ],
+                    "properties": {
+                      "value": {
+                        "type": "object",
+                        "properties": {}
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "uiSchemaParkingLot": {}
+                }
+              ],
+              "buttons": [
+                {
+                  "kind": "submit",
+                  "name": "submit",
+                  "edge_id": "9a80b550-d0ee-48af-9f15-3a613642847c",
+                  "visible": true,
+                  "display_name": "Submit"
+                },
+                {
+                  "kind": "cancel",
+                  "name": "cancel",
+                  "visible": false,
+                  "display_name": "Cancel"
+                }
+              ],
+              "jsonSchema": {
+                "type": "object",
+                "required": [],
+                "properties": {
+                  "field_08cee1c9-8a4f-42fb-a7a7-ab67336be78a": {
+                    "type": "string",
+                    "title": "Phone Number"
+                  },
+                  "field_0bc38cc1-b16d-4828-9c19-bb1d1f343445": {
+                    "type": "string",
+                    "title": "Department"
+                  },
+                  "field_1625aa24-62d2-4417-a228-fd7bed25ac5f": {
+                    "type": "string",
+                    "title": "Last Name"
+                  },
+                  "field_229b289b-e93a-4710-b7b2-116484330949": {
+                    "title": "Employment Status"
+                  },
+                  "field_27ec96c6-67d1-405a-baba-b6f81ec6644c": {
+                    "title": "Office Location"
+                  },
+                  "field_8be8532c-297c-436a-9d0c-95d63256ff21": {
+                    "type": "string",
+                    "title": "Job Title"
+                  },
+                  "field_96c1d93a-5e79-47e9-ab32-48ffffc35b41": {
+                    "title": "Employee ID"
+                  },
+                  "field_b9247820-f8a1-42f5-b9dd-cc5ef821a3ca": {
+                    "type": "string",
+                    "title": "First Name"
+                  },
+                  "field_e75d15d1-d255-4cc2-9c59-07d60f3d68cd": {
+                    "type": "string",
+                    "title": "Work Email"
+                  }
+                },
+                "description": "\u0e01\u0e23\u0e38\u0e13\u0e32\u0e15\u0e23\u0e27\u0e08\u0e2a\u0e2d\u0e1a\u0e04\u0e27\u0e32\u0e21\u0e16\u0e39\u0e01\u0e15\u0e49\u0e2d\u0e07\u0e02\u0e2d\u0e07\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25 \u0e2b\u0e23\u0e37\u0e2d\u0e40\u0e1e\u0e34\u0e48\u0e21\u0e40\u0e15\u0e34\u0e21\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e2d\u0e37\u0e48\u0e19\u0e17\u0e35\u0e48\u0e04\u0e38\u0e13\u0e15\u0e49\u0e2d\u0e07\u0e01\u0e32\u0e23\u0e2d\u0e31\u0e1e\u0e40\u0e14\u0e15",
+                "additionalProperties": false
+              },
+              "display_name": "Form 1"
+            },
+            "kind": "user",
+            "name": "user_ca2ac15f-86b4-475b-bb48-2b4ac69d17f1",
+            "fields": [],
+            "owners": [],
+            "position": {
+              "x": 20,
+              "y": 254
+            },
+            "display_name": "\u0e41\u0e1a\u0e1a\u0e1f\u0e2d\u0e23\u0e4c\u0e21\u0e2d\u0e31\u0e1e\u0e40\u0e14\u0e15\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e1e\u0e19\u0e31\u0e01\u0e07\u0e32\u0e19"
+          }
+        },
+        "prompt_e8e796c3-2042-42c4-9dd4-098697b3a1ee": {
+          "spec": {
+            "llm": "watsonx/meta-llama/llama-3-2-90b-vision-instruct",
+            "kind": "prompt",
+            "name": "prompt_e8e796c3-2042-42c4-9dd4-098697b3a1ee",
+            "metadata": {
+              "creativity_slider_position": "5",
+              "creativity_slider_manual_override": false
+            },
+            "position": {
+              "x": 20,
+              "y": 108
+            },
+            "description": "",
+            "user_prompt": "{employee_id}",
+            "display_name": "Generative prompt",
+            "input_schema": {
+              "type": "object",
+              "required": [
+                "employee_id"
+              ],
+              "properties": {
+                "employee_id": {
+                  "type": "string",
+                  "description": ""
+                }
+              }
+            },
+            "output_schema": {
+              "type": "object",
+              "properties": {
+                "original value": {
+                  "type": "object",
+                  "properties": {
+                    "original_Email": {
+                      "type": "string"
+                    },
+                    "original_Hire_date": {
+                      "type": "string"
+                    },
+                    "original_Job_title": {
+                      "type": "string"
+                    },
+                    "original_Last_name": {
+                      "type": "string"
+                    },
+                    "original_Department": {
+                      "type": "string"
+                    },
+                    "original_First_name": {
+                      "type": "string"
+                    },
+                    "original_Manager_ID": {
+                      "type": "string"
+                    },
+                    "original_Phone_number": {
+                      "type": "string"
+                    },
+                    "original_Office_location": {
+                      "type": "string"
+                    },
+                    "original_Employment_status": {
+                      "type": "string"
+                    },
+                    "original_Workday_profile_UR": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "this is the original data of the employee before it is update"
+                }
+              }
+            },
+            "system_prompt": "The following is the original data of 5 employee in list ['employee_id', 'first_name', 'last_name', 'phone_number', 'email','department', 'job_title', 'hire_date', 'employment_status','manager_id', 'office_location', 'workday_profile_url'\n]\n\n\nDATA:\nemployee_1 = ['EMP001', 'John', 'Smith', '+1-555-0101', 'john.smith@techcorp.com', 'Engineering', 'Senior Software Engineer', '2022-03-15', 'Active', 'MGR001', 'New York', 'https://workday.com/profile/EMP001']\nemployee_2 = ['EMP002', 'Sarah', 'Johnson', '+1-555-0102', 'sarah.johnson@techcorp.com', 'Marketing', 'Marketing Manager', '2021-07-01', 'Active', 'MGR002', 'Los Angeles', 'https://workday.com/profile/EMP002']\nemployee_3 = ['EMP003', 'Michael', 'Chen', '+1-555-0103', 'michael.chen@techcorp.com', 'Finance', 'Financial Analyst', '2023-01-10', 'Active', 'MGR003', 'Chicago', 'https://workday.com/profile/EMP003']\nemployee_4 = ['EMP004', 'Lisa', 'Park', '+1-555-0104', 'lisa.park@techcorp.com', 'Human Resources', 'HR Specialist', '2020-05-20', 'Active', 'MGR004', 'New York', 'https://workday.com/profile/EMP004']\nemployee_5 = ['EMP005', 'Robert', 'Kim', '+1-555-0105', 'robert.kim@techcorp.com', 'Operations', 'Operations Coordinator', '2019-11-08', 'Active', 'MGR005', 'Denver', 'https://workday.com/profile/EMP005']\n\n\n\nYou will be given employee_id, your job is to return the information on the employee using the given data. return the following variables in json format:\n* original_First_name\n* original_Last_name\n* original_Phone_number\n* original_Email\n* original_Department\n* original_Job_title\n* original_Hire_date\n* original_Employment_status\n* original_Manager_ID\n* original_Office_location\n* original_Workday_profile_URL\n",
+            "llm_parameters": {
+              "top_k": 30,
+              "top_p": 0.7,
+              "temperature": 0.4,
+              "max_new_tokens": 200,
+              "min_new_tokens": 50,
+              "stop_sequences": [
+                "Human",
+                "AI"
+              ]
+            },
+            "prompt_examples": [
+              {
+                "input": "Sarah Johnson (EMP002)",
+                "enabled": true,
+                "expected_output": "{\n  \"original_First_name\": \"Sarah\",\n  \"original_Last_name\": \"Johnson\",\n  \"original_Phone_number\": \"+1-555-0102\",\n  \"original_Email\": \"sarah.johnson@techcorp.com\",\n  \"original_Department\": \"Marketing\",\n  \"original_Job_title\": \"Marketing Manager\",\n  \"original_Hire_date\": \"2021-07-01\",\n  \"original_Employment_status\": \"Active\",\n  \"original_Manager_ID\": \"MGR002\",\n  \"original_Office_location\": \"Los Angeles\",\n  \"original_Workday_profile_URL\": \"https://workday.com/profile/EMP002\"\n}"
+              },
+              {
+                "input": "Michael Chen (EMP003)",
+                "enabled": true,
+                "expected_output": "{\n  \"original_First_name\": \"Michael\",\n  \"original_Last_name\": \"Chen\",\n  \"original_Phone_number\": \"+1-555-0103\",\n  \"original_Email\": \"michael.chen@techcorp.com\",\n  \"original_Department\": \"Finance\",\n  \"original_Job_title\": \"Financial Analyst\",\n  \"original_Hire_date\": \"2023-01-10\",\n  \"original_Employment_status\": \"Active\",\n  \"original_Manager_ID\": \"MGR003\",\n  \"original_Office_location\": \"Chicago\",\n  \"original_Workday_profile_URL\": \"https://workday.com/profile/EMP003\"\n}"
+              },
+              {
+                "input": "Robert Kim (EMP005)",
+                "enabled": true,
+                "expected_output": "{\n  \"original_First_name\": \"Michael\",\n  \"original_Last_name\": \"Chen\",\n  \"original_Phone_number\": \"+1-555-0103\",\n  \"original_Email\": \"michael.chen@techcorp.com\",\n  \"original_Department\": \"Finance\",\n  \"original_Job_title\": \"Financial Analyst\",\n  \"original_Hire_date\": \"2023-01-10\",\n  \"original_Employment_status\": \"Active\",\n  \"original_Manager_ID\": \"MGR003\",\n  \"original_Office_location\": \"Chicago\",\n  \"original_Workday_profile_URL\": \"https://workday.com/profile/EMP003\"\n}"
+              }
+            ],
+            "test_input_data": {
+              "employee_id": "Robert Kim (EMP005)"
+            },
+            "error_handler_config": {
+              "max_retries": 0,
+              "error_message": "Something went wrong while running 'Generative prompt'",
+              "retry_interval": 1000
+            }
+          },
+          "input_map": {
+            "spec": {
+              "maps": [
+                {
+                  "metadata": {
+                    "assignmentType": "variable"
+                  },
+                  "has-no-value": false,
+                  "target_variable": "self.input.employee_id",
+                  "value_expression": "flow[\"extract update field\"].output.update_dto.employee_to_update"
+                }
+              ],
+              "name": ""
+            }
+          }
+        }
+      },
+      "schemas": {}
+    },
+    "UserActivity 2": {
+      "spec": {
+        "kind": "user_flow",
+        "name": "UserActivity 2",
+        "position": {
+          "x": -638.545556715054,
+          "y": 2184.1371904847783
+        },
+        "dimensions": {
+          "width": 286,
+          "height": 320
+        },
+        "initiators": [],
+        "display_name": "confirmed to update"
+      },
+      "edges": [
+        {
+          "id": "496cd7a8-445e-4a23-85af-93fd7fe247e9",
+          "end": "tool_f9a4df9b-7723-4993-9e22-dd30942e129b",
+          "start": "UserActivity 2__start__"
+        },
+        {
+          "id": "c48411e5-bf22-4410-842a-f9dfc0040e56",
+          "end": "UserActivity 2__end__",
+          "start": "tool_f9a4df9b-7723-4993-9e22-dd30942e129b"
+        }
+      ],
+      "nodes": {
+        "UserActivity 2__end__": {
+          "spec": {
+            "kind": "end",
+            "name": "UserActivity 2__end__",
+            "position": {
+              "x": 20,
+              "y": 254
+            }
+          }
+        },
+        "UserActivity 2__start__": {
+          "spec": {
+            "kind": "start",
+            "name": "UserActivity 2__start__",
+            "position": {
+              "x": 20,
+              "y": 0
+            }
+          }
+        },
+        "tool_f9a4df9b-7723-4993-9e22-dd30942e129b": {
+          "spec": {
+            "kind": "tool",
+            "name": "tool_f9a4df9b-7723-4993-9e22-dd30942e129b",
+            "tool": "update_personal_info:725bb5cd-d3e1-4541-9824-df1eb235685d",
+            "position": {
+              "x": 20,
+              "y": 108
+            },
+            "description": "Updates personal information for a specified employee in employee_personal_info.csv (case-insensitive).\nOnly the fields provided (not None) will be updated.\n\nSummary of Updatable Fields:\n    - first_name\n    - last_name\n    - phone_number\n    - email\n    - department\n    - job_title\n    - hire_date\n    - employment_status\n    - manager_id\n    - office_location",
+            "display_name": "update_personal_info",
+            "input_schema": {
+              "type": "object",
+              "required": [
+                "employee_id"
+              ],
+              "properties": {
+                "email": {
+                  "title": "Email"
+                },
+                "hire_date": {
+                  "title": "Hire Date"
+                },
+                "job_title": {
+                  "title": "Job Title"
+                },
+                "last_name": {
+                  "title": "Last Name"
+                },
+                "department": {
+                  "title": "Department"
+                },
+                "first_name": {
+                  "title": "First Name"
+                },
+                "manager_id": {
+                  "title": "Manager Id"
+                },
+                "employee_id": {
+                  "title": "Employee Id"
+                },
+                "phone_number": {
+                  "title": "Phone Number"
+                },
+                "office_location": {
+                  "title": "Office Location"
+                },
+                "employment_status": {
+                  "title": "Employment Status"
+                }
+              }
+            },
+            "output_schema": {
+              "type": "string",
+              "description": "Success or error message."
+            },
+            "error_handler_config": {
+              "max_retries": 0,
+              "error_message": "Something went wrong while running 'update_personal_info'",
+              "retry_interval": 1000
+            }
+          }
+        }
+      },
+      "schemas": {}
+    },
+    "UserActivity 3": {
+      "spec": {
+        "kind": "user_flow",
+        "name": "UserActivity 3",
+        "position": {
+          "x": -240.90864641314602,
+          "y": 2157.472553897819
+        },
+        "dimensions": {
+          "width": 286,
+          "height": 320
+        },
+        "initiators": [],
+        "display_name": "canceled to update"
+      },
+      "edges": [
+        {
+          "id": "d6d1c840-9b50-48e5-99ab-4a0da89bc23e",
+          "end": "user_5f8a8772-979a-4d4b-8e20-326a5767a08a",
+          "start": "UserActivity 3__start__"
+        },
+        {
+          "id": "c53af71f-2751-43ce-a9f8-e73f7441eb4f",
+          "end": "UserActivity 3__end__",
+          "start": "user_5f8a8772-979a-4d4b-8e20-326a5767a08a"
+        }
+      ],
+      "nodes": {
+        "UserActivity 3__end__": {
+          "spec": {
+            "kind": "end",
+            "name": "UserActivity 3__end__",
+            "position": {
+              "x": 20,
+              "y": 254
+            }
+          }
+        },
+        "UserActivity 3__start__": {
+          "spec": {
+            "kind": "start",
+            "name": "UserActivity 3__start__",
+            "position": {
+              "x": 20,
+              "y": 0
+            }
+          }
+        },
+        "user_5f8a8772-979a-4d4b-8e20-326a5767a08a": {
+          "spec": {
+            "kind": "user",
+            "name": "user_5f8a8772-979a-4d4b-8e20-326a5767a08a",
+            "fields": [
+              {
+                "kind": "text",
+                "name": "text_output_f50b9ceb-d5d9-444e-b1dc-31cf879b8d2f",
+                "text": "\u0e22\u0e01\u0e40\u0e25\u0e34\u0e01\u0e01\u0e32\u0e23\u0e2d\u0e31\u0e1e\u0e40\u0e14\u0e15\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e2a\u0e48\u0e27\u0e19\u0e15\u0e31\u0e27\u0e41\u0e25\u0e49\u0e27 \u0e16\u0e49\u0e32\u0e04\u0e38\u0e13\u0e15\u0e49\u0e2d\u0e07\u0e01\u0e32\u0e23\u0e2d\u0e31\u0e1e\u0e40\u0e14\u0e15\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e2a\u0e48\u0e27\u0e19\u0e15\u0e31\u0e27\u0e2d\u0e35\u0e01\u0e04\u0e23\u0e31\u0e49\u0e07 \u0e01\u0e23\u0e38\u0e13\u0e32\u0e41\u0e08\u0e49\u0e07\u0e40\u0e23\u0e32\u0e44\u0e14\u0e49\u0e40\u0e25\u0e22",
+                "direction": "output",
+                "input_schema": {
+                  "type": "object",
+                  "required": [
+                    "value"
+                  ],
+                  "properties": {
+                    "value": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            ],
+            "owners": [],
+            "position": {
+              "x": 20,
+              "y": 108
+            },
+            "display_name": "canceled message"
+          }
+        }
+      },
+      "schemas": {}
+    },
+    "UserActivity 4": {
+      "spec": {
+        "kind": "user_flow",
+        "name": "UserActivity 4",
+        "position": {
+          "x": 409.77058303336037,
+          "y": 370.72287565185275
+        },
+        "dimensions": {
+          "width": 286,
+          "height": 320
+        },
+        "initiators": [],
+        "display_name": "User activity 4"
+      },
+      "edges": [
+        {
+          "id": "e9cb6913-cd73-489f-9036-b41ddd9f06ad",
+          "end": "user_27ce5ae5-c34a-4eb9-bb16-746fa356c3f0",
+          "start": "UserActivity 4__start__"
+        },
+        {
+          "id": "8627621c-79db-47a0-9a43-6e4da7704600",
+          "end": "UserActivity 4__end__",
+          "start": "user_27ce5ae5-c34a-4eb9-bb16-746fa356c3f0"
+        }
+      ],
+      "nodes": {
+        "UserActivity 4__end__": {
+          "spec": {
+            "kind": "end",
+            "name": "UserActivity 4__end__",
+            "position": {
+              "x": 20,
+              "y": 254
+            }
+          }
+        },
+        "UserActivity 4__start__": {
+          "spec": {
+            "kind": "start",
+            "name": "UserActivity 4__start__",
+            "position": {
+              "x": 20,
+              "y": 0
+            }
+          }
+        },
+        "user_27ce5ae5-c34a-4eb9-bb16-746fa356c3f0": {
+          "spec": {
+            "kind": "user",
+            "name": "user_27ce5ae5-c34a-4eb9-bb16-746fa356c3f0",
+            "fields": [
+              {
+                "kind": "text",
+                "name": "text_output_9ad92dfb-eef8-489b-89b9-4d2256a0c352",
+                "text": "\u0e15\u0e33\u0e41\u0e2b\u0e19\u0e48\u0e07\u0e02\u0e2d\u0e07\u0e04\u0e38\u0e13\u0e44\u0e21\u0e48\u0e2a\u0e32\u0e21\u0e32\u0e23\u0e16\u0e17\u0e33\u0e04\u0e33\u0e02\u0e2d\u0e17\u0e35\u0e48\u0e04\u0e38\u0e13\u0e15\u0e49\u0e2d\u0e07\u0e01\u0e32\u0e23\u0e44\u0e14\u0e49",
+                "direction": "output",
+                "input_schema": {
+                  "type": "object",
+                  "required": [
+                    "value"
+                  ],
+                  "properties": {
+                    "value": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            ],
+            "owners": [],
+            "position": {
+              "x": 20,
+              "y": 108
+            },
+            "display_name": "Message 1"
+          }
+        }
+      },
+      "schemas": {}
+    },
+    "prompt_68ffb5ff-7854-4fcf-af66-899051af675c": {
+      "spec": {
+        "llm": "watsonx/meta-llama/llama-3-2-90b-vision-instruct",
+        "kind": "prompt",
+        "name": "prompt_68ffb5ff-7854-4fcf-af66-899051af675c",
+        "metadata": {
+          "creativity_slider_position": "5",
+          "creativity_slider_manual_override": false
+        },
+        "position": {
+          "x": -291.15853891745803,
+          "y": 621.1220755977622
+        },
+        "description": "",
+        "user_prompt": "{user_input}",
+        "display_name": "extract update field",
+        "input_schema": {
+          "type": "object",
+          "required": [
+            "user_input"
+          ],
+          "properties": {
+            "user_input": {
+              "type": "string",
+              "description": ""
+            }
+          }
+        },
+        "output_schema": {
+          "type": "object",
+          "properties": {
+            "update_dto": {
+              "type": "object",
+              "properties": {
+                "new_email": {
+                  "type": "string"
+                },
+                "new_lastname": {
+                  "type": "string"
+                },
+                "new_firstname": {
+                  "type": "string"
+                },
+                "new_hire_date": {
+                  "type": "string"
+                },
+                "new_job_title": {
+                  "type": "string"
+                },
+                "new_department": {
+                  "type": "string"
+                },
+                "new_manager_id": {
+                  "type": "string"
+                },
+                "new_phone_number": {
+                  "type": "string"
+                },
+                "employee_to_update": {
+                  "type": "string"
+                },
+                "new_office_location": {
+                  "type": "string"
+                },
+                "new_employment_status": {
+                  "type": "string"
+                }
+              },
+              "description": ""
+            }
+          }
+        },
+        "system_prompt": "You are an expert entity extraction model. You will received a manager query to update an employee information. Your task is to extract the specified entities from the query in a form of json object.\n\n### INSTRUCTIONS ###\n1.  The variables you need to extract include:\n- `employee_to_update`: This variable indicate the employee the manager target to change some information of them. You only allow to choose one component of the following list. So choose the closest one to the user query. [\"Sarah Johnson (EMP002)\", \"Michael Chen (EMP003)\", \"Lisa Park (EMP004)\", \"Robert Kim (EMP005)\"]. (eg. I want to change the information of Jane -> `employee_to_update`= \"Michael Chen (EMP003)\")If there is no name or id mention in the text at all, give blank text value, \"\".\n\n- `new_first_name`: new first name value that the manager wants to replace the old first name value\n- `new_last_name`: new last name value that the manager wants to replace the old last name value \n- `new_phone_number: new phone_number value that the manager wants to replace the old phone_number value \n- `new_email`, \n- `new_department`, \n- `new_job_title`, \n- `new_hire_date`, \n- `new_employment_status`: choose only from one of the following [\"Active\", \"Terminated\", \"Probation\"] \n- `new_manager_id`\n- `new_office_location`: chhoose only from one of the following [\"Bangkok\", \"New York\", \"Singapore\"]\n2.  If a value for a key is not found in the text, you MUST use a blank string `\"\"` for that key.\n5.  If the user provides a value for `employment_status` or `office_location` that is not in the allowed list, treat it as not found and use a blank string `\"\"`.\n\n### OUTPUT FORMAT ###\n- Your response **MUST** be a single, valid JSON object and nothing else.\n- **DO NOT** include any explanatory text, comments, or markdown formatting like ```json before or after the JSON object.\n",
+        "llm_parameters": {
+          "top_k": 30,
+          "top_p": 0.7,
+          "temperature": 0.4,
+          "max_new_tokens": 200,
+          "min_new_tokens": 50,
+          "stop_sequences": [
+            "Human",
+            "AI"
+          ]
+        },
+        "prompt_examples": [
+          {
+            "input": "Activate \u0e2a\u0e16\u0e32\u0e19\u0e30\u0e1e\u0e19\u0e31\u0e01\u0e07\u0e32\u0e19\u0e02\u0e2d\u0e07 Sarah \u0e43\u0e2b\u0e49\u0e2b\u0e19\u0e48\u0e2d\u0e22",
+            "enabled": true,
+            "expected_output": "{\n  \"email\": \"\",\n  \"lastname\": \"\",\n  \"firstname\": \"\",\n  \"hire_date\": \"\",\n  \"job_title\": \"\",\n  \"department\": \"\",\n  \"manager_id\": \"\",\n  \"employee_id\": \"EMP002\",\n  \"phone_number\": \"\",\n  \"office_location\": \"\",\n  \"employment_status\": \"Active\"\n}"
+          },
+          {
+            "input": "\u0e40\u0e1b\u0e25\u0e35\u0e48\u0e22\u0e19\u0e40\u0e1a\u0e2d\u0e23\u0e4c\u0e42\u0e17\u0e23\u0e01\u0e31\u0e1a\u0e2d\u0e35\u0e40\u0e21\u0e25\u0e02\u0e2d\u0e07 kim \u0e40\u0e1b\u0e47\u0e19 0876665434 \u0e41\u0e25\u0e30 kimkim@gmail.com",
+            "enabled": true,
+            "expected_output": "{\n  \"new_email\": \"kimkim@gmail.com\",\n  \"new_lastname\": \"\",\n  \"new_firstname\": \"\",\n  \"new_hire_date\": \"\",\n  \"new_job_title\": \"\",\n  \"new_department\": \"\",\n  \"new_manager_id\": \"\",\n  \"new_phone_number\": \"0876665434\",\n  \"employee_to_update\": \"Robert Kim (EMP005)\",\n  \"new_office_location\": \"\",\n  \"new_employment_status\": \"\"\n}"
+          },
+          {
+            "input": "\u0e40\u0e1b\u0e25\u0e35\u0e48\u0e22\u0e19 Department \u0e1e\u0e19\u0e31\u0e01\u0e07\u0e32\u0e19\n",
+            "enabled": true,
+            "expected_output": "{\n  \"new_email\": \"\",\n  \"new_lastname\": \"\",\n  \"new_firstname\": \"\",\n  \"new_hire_date\": \"\",\n  \"new_job_title\": \"\",\n  \"new_department\": \"\",\n  \"new_manager_id\": \"\",\n  \"new_phone_number\": \"\",\n  \"employee_to_update\": \"\",\n  \"new_office_location\": \"\",\n  \"new_employment_status\": \"\"\n}"
+          }
+        ],
+        "test_input_data": {
+          "user_input": "\u0e40\u0e1b\u0e25\u0e35\u0e48\u0e22\u0e19 Department \u0e1e\u0e19\u0e31\u0e01\u0e07\u0e32\u0e19\n"
+        },
+        "error_handler_config": {
+          "max_retries": 3,
+          "error_message": "Something went wrong while running 'extract update field'",
+          "retry_interval": 1000
+        }
+      },
+      "input_map": {
+        "spec": {
+          "maps": [
+            {
+              "metadata": {
+                "assignmentType": "variable"
+              },
+              "has-no-value": false,
+              "target_variable": "self.input.user_input",
+              "value_expression": "flow.input.user_input"
+            }
+          ],
+          "name": ""
+        }
+      }
+    }
+  },
+  "schemas": {},
+  "metadata": {
+    "source_kind": "ui"
+  },
+  "output_map": {
+    "spec": {
+      "maps": [
+        {
+          "metadata": {
+            "assignmentType": "variable"
+          },
+          "has-no-value": false,
+          "target_variable": "self.output.is_success",
+          "value_expression": "flow[\"manager__update-info-flow\"][\"\u0e04\u0e38\u0e13\u0e22\u0e37\u0e19\u0e22\u0e31\u0e19\u0e17\u0e35\u0e48\u0e08\u0e30\u0e2d\u0e31\u0e1e\u0e40\u0e14\u0e15\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e2b\u0e23\u0e37\u0e2d\u0e44\u0e21\u0e48 (\u0e01\u0e23\u0e38\u0e13\u0e32\u0e15\u0e23\u0e27\u0e08\u0e2a\u0e2d\u0e1a\u0e04\u0e27\u0e32\u0e21\u0e16\u0e39\u0e01\u0e15\u0e49\u0e2d\u0e07)\"].output.value"
+        }
+      ],
+      "name": ""
+    }
+  }
+}
